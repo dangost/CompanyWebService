@@ -298,53 +298,99 @@ CREATE TABLE [Warehouse] (
             Update();
         }
 
-        [HttpPost]
-        public void Add([FromBody]Person obj)
-        {
-            dataBase.People.Add(obj);
-            Update();
-        }
+        // <ADD>
+        [HttpPost] public void Add([FromBody]Country obj) { dataBase.Countries.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]Customer obj) { dataBase.Customers.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]CustomerCompany obj) { dataBase.CustomerCompanies.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]CustomerEmployee obj) { dataBase.CustomerEmployees.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]Employment obj) { dataBase.Employments.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]EmploymentJobs obj) { dataBase.EmploymentJobs.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]Inventory obj) { dataBase.Inventories.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]Location obj) { dataBase.Locations.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]OrderItem obj) { dataBase.OrderItems.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]Orders obj) { dataBase.Orders.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]Person obj) { dataBase.People.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]PersonLocation obj) { dataBase.PersonLocations.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]PhoneNumber obj) { dataBase.PhoneNumbers.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]Product obj) { dataBase.Products.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]RestrictedInfo obj) { dataBase.RestrictedInfo.Add(obj); Update(); }
+        [HttpPost] public void Add([FromBody]Warehouse obj) { dataBase.Warehouses.Add(obj); Update(); }
+        // </ADD>
 
-        [HttpPut]
-        public void EditPerson(int id, [FromBody]Person obj)
-        {
-            if (id == obj.Id)
-            {
-                dataBase.Entry(obj).State = EntityState.Modified;
 
-                Update();
-            }
-        }
+        // <EDIT>
+        [HttpPut] public void Edit(int id, [FromBody]Country obj) { if (id == obj.CountryId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Customer obj) { if (id == obj.CustomerId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]CustomerCompany obj) { if (id == obj.CompanyId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]CustomerEmployee obj) { if (id == obj.CustomerEmployeeId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Employment obj) { if (id == obj.EmployeeID) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]EmploymentJobs obj) { if (id == obj.HRJobId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Inventory obj) { if (id == obj.InventoryId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Location obj) { if (id == obj.LocationId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]OrderItem obj) { if (id == obj.OrderItemId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Orders obj) { if (id == obj.OrderId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Person obj) { if (id == obj.Id) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]PhoneNumber obj) { if (id == obj.PhoneNumberId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Product obj) { if (id == obj.ProductId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Warehouse obj) { if (id == obj.WarehouseId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        // </EDIT>
 
-        public void Delete(int id)
-        {
-            Person person = dataBase.People.Find(id);
-            if (person != null)
-            {
-                dataBase.People.Remove(person);
-                Update();
-            }            
-        }
 
-        public IEnumerable<Person> GetPeople()
-        {
-            return dataBase.People;
-        }
+        // <DELETE>
+        public void DeleteCountry(int id) { Country obj = dataBase.Countries.Find(id); if (obj != null) { dataBase.Countries.Remove(obj); Update(); } }
+        public void DeleteCustomer(int id) { Customer obj = dataBase.Customers.Find(id); if (obj != null) { dataBase.Customers.Remove(obj); Update(); } }
+        public void DeleteCustomerCompany(int id) { CustomerCompany obj = dataBase.CustomerCompanies.Find(id); if (obj != null) { dataBase.CustomerCompanies.Remove(obj); Update(); } }
+        public void DeleteCustomerEmployee(int id) { CustomerEmployee obj = dataBase.CustomerEmployees.Find(id); if (obj != null) { dataBase.CustomerEmployees.Remove(obj); Update(); } }
+        public void DeleteEmployment(int id) { Employment obj = dataBase.Employments.Find(id); if (obj != null) { dataBase.Employments.Remove(obj); Update(); } }
+        public void DeleteEmploymentJobs(int id) { EmploymentJobs obj = dataBase.EmploymentJobs.Find(id); if (obj != null) { dataBase.EmploymentJobs.Remove(obj); Update(); } }
+        public void DeleteInventory(int id) { Inventory obj = dataBase.Inventories.Find(id); if (obj != null) { dataBase.Inventories.Remove(obj); Update(); } }
+        public void DeleteLocation(int id) { Location obj = dataBase.Locations.Find(id); if (obj != null) { dataBase.Locations.Remove(obj); Update(); } }
+        public void DeleteOrderItem(int id) { OrderItem obj = dataBase.OrderItems.Find(id); if (obj != null) { dataBase.OrderItems.Remove(obj); Update(); } }
+        public void DeleteOrders(int id) { Orders obj = dataBase.Orders.Find(id); if (obj != null) { dataBase.Orders.Remove(obj); Update(); } }
+        public void DeletePerson(int id) { Person obj = dataBase.People.Find(id); if (obj != null) { dataBase.People.Remove(obj); Update(); } }
+        public void DeletePersonLocation(int id) { PersonLocation obj = dataBase.PersonLocations.Find(id); if (obj != null) { dataBase.PersonLocations.Remove(obj); Update(); } }
+        public void DeletePhoneNumber(int id) { PhoneNumber obj = dataBase.PhoneNumbers.Find(id); if (obj != null) { dataBase.PhoneNumbers.Remove(obj); Update(); } }
+        public void DeleteProduct(int id) { Product obj = dataBase.Products.Find(id); if (obj != null) { dataBase.Products.Remove(obj); Update(); } }
+        public void DeleteRestrictedInfo(int id) { RestrictedInfo obj = dataBase.RestrictedInfo.Find(id); if (obj != null) { dataBase.RestrictedInfo.Remove(obj); Update(); } }
+        public void DeleteWarehouse(int id) { Warehouse obj = dataBase.Warehouses.Find(id); if (obj != null) { dataBase.Warehouses.Remove(obj); Update(); } }
+        // </DELETE>
 
-        public Person GetPersonId(int id)
-        {
-            Person person = null;
 
-            foreach(Person p in dataBase.People)
-            {
-                if (p.Id == id)
-                {
-                    person = p;
-                    break;
-                }                
-            }
-            return person;
-        }
+        // <GET>
+        public IEnumerable<Country> GetCountries() { return dataBase.Countries; }
+        public IEnumerable<Customer> GetCustomers() { return dataBase.Customers; }
+        public IEnumerable<CustomerCompany> GetCustomerCompanies() { return dataBase.CustomerCompanies; }
+        public IEnumerable<CustomerEmployee> GetCustomerEmployees() { return dataBase.CustomerEmployees; }
+        public IEnumerable<Employment> GetEmployments() { return dataBase.Employments; }
+        public IEnumerable<EmploymentJobs> GetEmploymentJobs() { return dataBase.EmploymentJobs; }
+        public IEnumerable<Inventory> GetInventories() { return dataBase.Inventories; }
+        public IEnumerable<Location> GetLocations() { return dataBase.Locations; }
+        public IEnumerable<OrderItem> GetOrderItems() { return dataBase.OrderItems; }
+        public IEnumerable<Orders> GetOrders() { return dataBase.Orders; }
+        public IEnumerable<Person> GetPeople() { return dataBase.People; }
+        public IEnumerable<PersonLocation> GetPersonLocations() { return dataBase.PersonLocations; }
+        public IEnumerable<PhoneNumber> GetPhoneNumbers() { return dataBase.PhoneNumbers; }
+        public IEnumerable<Product> GetProducts() { return dataBase.Products; }
+        public IEnumerable<RestrictedInfo> GetRestrictedInfo() { return dataBase.RestrictedInfo; }
+        public IEnumerable<Warehouse> GetWarehouses() { return dataBase.Warehouses; }
+        // </GET>
+
+        // <GETID>
+        public Country GetCountryId(int id) { Country obj = null; foreach (Country o in dataBase.Countries) { if (o.CountryId == id) { obj = o; break; } } return obj; }
+        public Customer GetCustomerId(int id) { Customer obj = null; foreach (Customer o in dataBase.Customers) { if (o.CustomerId == id) { obj = o; break; } } return obj; }
+        public CustomerCompany GetCustomerCompanyId(int id) { CustomerCompany obj = null; foreach (CustomerCompany o in dataBase.CustomerCompanies) { if (o.CompanyId == id) { obj = o; break; } } return obj; }
+        public CustomerEmployee GetCustomerEmployeeId(int id) { CustomerEmployee obj = null; foreach (CustomerEmployee o in dataBase.CustomerEmployees) { if (o.CustomerEmployeeId == id) { obj = o; break; } } return obj; }
+        public Employment GetEmploymentId(int id) { Employment obj = null; foreach (Employment o in dataBase.Employments) { if (o.EmployeeID == id) { obj = o; break; } } return obj; }
+        public EmploymentJobs GetEmploymentJobsId(int id) { EmploymentJobs obj = null; foreach (EmploymentJobs o in dataBase.EmploymentJobs) { if (o.HRJobId == id) { obj = o; break; } } return obj; }
+        public Inventory GetInventoryId(int id) { Inventory obj = null; foreach (Inventory o in dataBase.Inventories) { if (o.InventoryId == id) { obj = o; break; } } return obj; }
+        public Location GetLocationId(int id) { Location obj = null; foreach (Location o in dataBase.Locations) { if (o.LocationId == id) { obj = o; break; } } return obj; }
+        public OrderItem GetOrderItemId(int id) { OrderItem obj = null; foreach (OrderItem o in dataBase.OrderItems) { if (o.OrderItemId == id) { obj = o; break; } } return obj; }
+        public Orders GetOrdersId(int id) { Orders obj = null; foreach (Orders o in dataBase.Orders) { if (o.OrderId == id) { obj = o; break; } } return obj; }
+        public Person GetPersonId(int id) { Person obj = null; foreach (Person o in dataBase.People) { if (o.Id == id) { obj = o; break; } } return obj; }
+        public PhoneNumber GetPhoneNumberId(int id) { PhoneNumber obj = null; foreach (PhoneNumber o in dataBase.PhoneNumbers) { if (o.PhoneNumberId == id) { obj = o; break; } } return obj; }
+        public Product GetProductId(int id) { Product obj = null; foreach (Product o in dataBase.Products) { if (o.ProductId == id) { obj = o; break; } } return obj; }
+        public Warehouse GetWarehouseId(int id) { Warehouse obj = null; foreach (Warehouse o in dataBase.Warehouses) { if (o.WarehouseId == id) { obj = o; break; } } return obj; }
+        // </GETID>
 
         void Update()
         {
