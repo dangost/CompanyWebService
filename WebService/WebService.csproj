@@ -202,12 +202,28 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\SQLiteServiceBase.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerCompany.cs" />
+    <Compile Include="Models\CustomerEmployee.cs" />
+    <Compile Include="Models\Employment.cs" />
+    <Compile Include="Models\EmploymentJobs.cs" />
+    <Compile Include="Models\Inventory.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\PersonLocation.cs" />
+    <Compile Include="Models\PhoneNumber.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\RestrictedInfo.cs" />
+    <Compile Include="Models\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

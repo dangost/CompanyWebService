@@ -2,6 +2,17 @@
 {
     public class Person
     {
+        public void Create(string fisrtname, string lastname, string middlename, string nickname,int natlangcode, int colturecode, string gender )
+        {
+            FirstName = fisrtname;
+            LastName = lastname;
+            MiddleName = middlename;
+            Nickname = nickname;
+            NatLangCode = natlangcode;
+            CultureCode = colturecode;
+            Gender = gender;
+        }
+
         public int Id { get; set; }
 
         public string FirstName { get; set; }
