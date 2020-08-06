@@ -46,10 +46,6 @@ namespace WebService.Controllers
 
         void Load()
         {
-            File.Delete(sqLitePath);
-            
-            
-
             if(!File.Exists(sqLitePath))
             {
                 if(!Directory.Exists(@"db"))
