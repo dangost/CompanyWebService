@@ -4,6 +4,7 @@ namespace WebService.Models
 {
     public class CustomerEmployee
     {
+        [Key]
         public int CustomerEmployeeId { get; set; }
 
         public int CompanyId { get; set; }

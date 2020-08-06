@@ -3,6 +3,7 @@ namespace WebService.Models
 {
     public class RestrictedInfo
     {
+        [Key]
         public int PersonId { get; set; }
 
         public string DateOfBirth { get; set; }
@@ -15,6 +16,6 @@ namespace WebService.Models
 
         public string HireDire { get; set; }
 
-        public int SenioriryCode { get; set; }
+        public int SeniorityCode { get; set; }
     }
 }

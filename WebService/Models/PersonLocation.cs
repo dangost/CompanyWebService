@@ -4,6 +4,7 @@ namespace WebService.Models
 {
     public class PersonLocation
     {
+        [Key]
         public int PersonsPersonId { get; set; }
 
         public int LocationsLocationId { get; set; }

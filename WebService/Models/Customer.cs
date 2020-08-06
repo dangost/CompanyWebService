@@ -3,6 +3,7 @@ namespace WebService.Models
 {
     public class Customer
     {
+        [Key]
         public int CustomerId { get; set; }
 
         public int PersonId { get; set; }

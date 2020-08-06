@@ -4,6 +4,7 @@ namespace WebService.Models
 {
     public class Location
     {
+        [Key]
         public int LocationId { get; set; }
 
         public int CountryId { get; set; }
@@ -26,6 +27,6 @@ namespace WebService.Models
 
         public string ShippingNotes { get; set; }
 
-        public int CountriesCountry { get; set; }
+        public int CountriesCountryId { get; set; }
     }
 }

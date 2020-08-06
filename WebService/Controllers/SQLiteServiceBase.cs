@@ -87,7 +87,7 @@ CREATE TABLE [CustomerCompanies] (
 	[CompanyId]	INTEGER,
 	[CompanyName]	TEXT,
 	[CompanyCreditLimit]	INTEGER,
-	[CredtLimitCurrency]	TEXT,
+	[CreditLimitCurrency]	TEXT,
 	PRIMARY KEY([CompanyId])
 );
 
@@ -107,25 +107,26 @@ CREATE TABLE [CustomerEmployees] (
 CREATE TABLE [Employments] (
 	[EmployeeId]	INTEGER,
 	[PersonId]	INTEGER,
-	[HRjob]	INTEGER,
+	[HRJobId]	INTEGER,
 	[ManagerEmployeeId]	INTEGER,
 	[StartDate]	TEXT,
 	[EndDate]	TEXT,
-	[CommissonPercent]	TEXT,
+    [Salary]    INTEGER,
+	[CommissionPercent]	INTEGER,
 	[Employmentcol]	TEXT,
 	PRIMARY KEY([EmployeeId]),
-	FOREIGN KEY([HRjob]) REFERENCES [EmploymentJobs]([HRjobId]),
+	FOREIGN KEY([HRJobId]) REFERENCES [EmploymentJobs]([HRJobId]),
 	FOREIGN KEY([PersonId]) REFERENCES [People]([Id])
 );
 
 CREATE TABLE [EmploymentJobs] (
-	[HRjobId]	INTEGER,
-	[CountriesCountryID]	INTEGER,
+	[HRJobId]	INTEGER,
+	[CountriesCountryId]	INTEGER,
 	[JobTitle]	TEXT,
-	[MinSalary]	TEXT,
-	[MaxSalary]	TEXT,
-	PRIMARY KEY([HRjobId]),
-	FOREIGN KEY([CountriesCountryID]) REFERENCES [Countries]([CountryId])
+	[MinSalary]	INTEGER,
+	[MaxSalary]	INTEGER,
+	PRIMARY KEY([HRJobId]),
+	FOREIGN KEY([CountriesCountryId]) REFERENCES [Countries]([CountryId])
 );
 
 
@@ -152,7 +153,7 @@ CREATE TABLE [Locations] (
 	[Description]	TEXT,
 	[ShippingNotes]	TEXT,
 	[CountriesCountryId]	INTEGER,
-	FOREIGN KEY([CountriesCountryId]) REFERENCES [Countr]([CountryId]),
+	FOREIGN KEY([CountriesCountryId]) REFERENCES [Country]([CountryId]),
 	PRIMARY KEY([LocationId])
 );
 
@@ -212,7 +213,7 @@ CREATE TABLE [PhoneNumbers] (
 	[PhoneNumberId]	INTEGER,
 	[PeoplePersonId]	INTEGER,
 	[LocationsLocationId]	INTEGER,
-	[PhoneNumbers]	INTEGER,
+	[Phonenumber]	INTEGER,
 	[CountryCode]	INTEGER,
 	[PhoneType]	INTEGER,
 	FOREIGN KEY([PeoplePersonId]) REFERENCES [People]([Id]),
@@ -238,13 +239,13 @@ CREATE TABLE [Products] (
 );
 
 
-CREATE TABLE [RestrictedInfo] (
+CREATE TABLE [RestrictedInfoes] (
 	[PersonId]	INTEGER,
 	[DateOfBirth]	TEXT,
 	[DateOfDeath]	TEXT,
-	[GovermentId]	TEXT,
+	[GovernmentId]	TEXT,
 	[PassportId]	TEXT,
-	[HireDate]	TEXT,
+	[HireDire]	TEXT,
 	[SeniorityCode]	INTEGER,
 	FOREIGN KEY([PersonId]) REFERENCES [People]([Id]),
 PRIMARY KEY([PersonId])
