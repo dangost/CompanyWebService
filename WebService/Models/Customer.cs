@@ -1,4 +1,5 @@
-﻿namespace WebService.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace WebService.Models
 {
     public class Customer
     {

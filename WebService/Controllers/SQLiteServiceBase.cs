@@ -38,23 +38,23 @@ namespace WebService.Controllers
             public DbSet<RestrictedInfo> RestrictedInfo { get; set; }
             public DbSet<Warehouse> Warehouses { get; set; }
         }
+        
 
-        ApplicationContext dataBase { get; set; }
+        ApplicationContext dataBase = new ApplicationContext();
 
-        string sqLitePath = @"D:\db\company.db";
+        string sqLitePath = @"db\company.db";
 
         void Load()
-        {  
-            if(File.Exists(sqLitePath))
-            {
-                File.Delete(sqLitePath);
-            }
+        {
+            File.Delete(sqLitePath);
+            
+            
 
             if(!File.Exists(sqLitePath))
             {
-                if(!Directory.Exists(@"D:\db"))
+                if(!Directory.Exists(@"db"))
                 {
-                    Directory.CreateDirectory(@"D:\db");
+                    Directory.CreateDirectory(@"db");
                 }
 
                 SQLiteConnection.CreateFile(sqLitePath);
@@ -66,27 +66,28 @@ namespace WebService.Controllers
 
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
-                        string allTablesAutomated = @"CREATE TABLE [Country] (
+                        string allTablesAutomated = @"CREATE TABLE [Countries] (
 	[CountryId]	INTEGER,
-	[ContryName]	TEXT,
+	[CountryName]	TEXT,
 	[CountryCode]	TEXT,
 	[NatLangCode]	INTEGER,
 	[CurrencyCode]	TEXT,
 	PRIMARY KEY([CountryId])
 );
 
-CREATE TABLE [Customer] (
+CREATE TABLE [Customers] (
 	[CustomerId]	INTEGER,
 	[PersonId]	INTEGER,
 	[CustomerEmployeeId]	INTEGER,
 	[AccountMgrId]	INTEGER,
 	[IncomeLevel]	INTEGER,
-	FOREIGN KEY([CustomerEmployeeId]) REFERENCES [CustomerEmployee]([CustomerEmployeeId]),
+	FOREIGN KEY([CustomerEmployeeId]) REFERENCES [CustomerEmployees]([CustomerEmployeeId]),
 	FOREIGN KEY([PersonId]) REFERENCES [People]([Id]),
-	FOREIGN KEY([CustomerId]) REFERENCES [Orders]([CustomerId])
+	FOREIGN KEY([CustomerId]) REFERENCES [Orders]([CustomerId]),
+    PRIMARY KEY([CustomerId])
 );
 
-CREATE TABLE [CustomerCompany] (
+CREATE TABLE [CustomerCompanies] (
 	[CompanyId]	INTEGER,
 	[CompanyName]	TEXT,
 	[CompanyCreditLimit]	INTEGER,
@@ -94,17 +95,7 @@ CREATE TABLE [CustomerCompany] (
 	PRIMARY KEY([CompanyId])
 );
 
-
-CREATE TABLE [CustomerCompany] (
-	[CompanyId]	INTEGER,
-	[CompanyName]	TEXT,
-	[CompanyCreditLimit]	INTEGER,
-	[CredtLimitCurrency]	TEXT,
-	PRIMARY KEY([CompanyId])
-);
-
-
-CREATE TABLE [CustomerEmployee] (
+CREATE TABLE [CustomerEmployees] (
 	[CustomerEmployeeId]	INTEGER,
 	[CompanyId]	INTEGER,
 	[BadgeNumber]	TEXT,
@@ -112,12 +103,12 @@ CREATE TABLE [CustomerEmployee] (
 	[Department]	TEXT,
 	[CreditLimit]	INTEGER,
 	[CreditLimitCurrency]	TEXT,
-	FOREIGN KEY([CompanyId]) REFERENCES [CustomerCompany]([CompanyId]),
+	FOREIGN KEY([CompanyId]) REFERENCES [CustomerCompanies]([CompanyId]),
 	PRIMARY KEY([CustomerEmployeeId])
 );
 
 
-CREATE TABLE [Employment] (
+CREATE TABLE [Employments] (
 	[EmployeeId]	INTEGER,
 	[PersonId]	INTEGER,
 	[HRjob]	INTEGER,
@@ -138,21 +129,21 @@ CREATE TABLE [EmploymentJobs] (
 	[MinSalary]	TEXT,
 	[MaxSalary]	TEXT,
 	PRIMARY KEY([HRjobId]),
-	FOREIGN KEY([CountriesCountryID]) REFERENCES [Country]([CountryId])
+	FOREIGN KEY([CountriesCountryID]) REFERENCES [Countries]([CountryId])
 );
 
 
-CREATE TABLE [Inventory] (
+CREATE TABLE [Inventories] (
 	[InventoryId]	INTEGER,
 	[ProductId]	INTEGER,
 	[WarehouseId]	INTEGER,
 	[QuantityOnHand]	INTEGER,
 	[QuantityAvaliable]	INTEGER,
-	FOREIGN KEY([ProductId]) REFERENCES [Product]([ProductId]),
+	FOREIGN KEY([ProductId]) REFERENCES [Products]([ProductId]),
 	PRIMARY KEY([InventoryId])
 );
 
-CREATE TABLE [Location] (
+CREATE TABLE [Locations] (
 	[LocationId]	INTEGER,
 	[CountryId]	INTEGER,
 	[AdressLine1]	TEXT,
@@ -165,19 +156,19 @@ CREATE TABLE [Location] (
 	[Description]	TEXT,
 	[ShippingNotes]	TEXT,
 	[CountriesCountryId]	INTEGER,
-	FOREIGN KEY([CountriesCountryId]) REFERENCES [Country]([CountryId]),
+	FOREIGN KEY([CountriesCountryId]) REFERENCES [Countr]([CountryId]),
 	PRIMARY KEY([LocationId])
 );
 
 
-CREATE TABLE [OrderItem] (
+CREATE TABLE [OrderItems] (
 	[OrderItemId]	INTEGER,
 	[OrderId]	INTEGER,
 	[ProductId]	INTEGER,
 	[UnitPrice]	INTEGER,
 	[Quantity]	INTEGER,
 	PRIMARY KEY([OrderItemId]),
-	FOREIGN KEY([ProductId]) REFERENCES [Product]([ProductId]),
+	FOREIGN KEY([ProductId]) REFERENCES [Products]([ProductId]),
 	FOREIGN KEY([OrderId]) REFERENCES [Orders]([OrderId])
 );
 
@@ -191,7 +182,7 @@ CREATE TABLE [Orders] (
 	[OrderTotal]	INTEGER,
 	[OrderCurrency]	TEXT,
 	[PromotionCode]	TEXT,
-	FOREIGN KEY([SalesRepId]) REFERENCES [CustomerCompany]([CompanyId]),
+	FOREIGN KEY([SalesRepId]) REFERENCES [CustomerCompanies]([CompanyId]),
 	PRIMARY KEY([OrderId],[CustomerId])
 );
 
@@ -216,24 +207,25 @@ CREATE TABLE [PersonLocations] (
 	[LocationUsage]	TEXT,
 	[Notes]	TEXT,
 	FOREIGN KEY([PersonsPersonId]) REFERENCES [People]([Id]),
-	FOREIGN KEY([LocationsLocationId]) REFERENCES [Location]([LocationId])
+	FOREIGN KEY([LocationsLocationId]) REFERENCES [Locations]([LocationId]),
+PRIMARY KEY([PersonsPersonId])
 );
 
 
-CREATE TABLE [PhoneNumber] (
+CREATE TABLE [PhoneNumbers] (
 	[PhoneNumberId]	INTEGER,
 	[PeoplePersonId]	INTEGER,
 	[LocationsLocationId]	INTEGER,
-	[PhoneNumber]	INTEGER,
+	[PhoneNumbers]	INTEGER,
 	[CountryCode]	INTEGER,
 	[PhoneType]	INTEGER,
 	FOREIGN KEY([PeoplePersonId]) REFERENCES [People]([Id]),
-	FOREIGN KEY([LocationsLocationId]) REFERENCES [Location]([LocationId]),
+	FOREIGN KEY([LocationsLocationId]) REFERENCES [Locations]([LocationId]),
 	PRIMARY KEY([PhoneNumberId])
 );
 
 
-CREATE TABLE [Product] (
+CREATE TABLE [Products] (
 	[ProductId]	INTEGER,
 	[ProductName]	TEXT,
 	[Description]	TEXT,
@@ -258,17 +250,19 @@ CREATE TABLE [RestrictedInfo] (
 	[PassportId]	TEXT,
 	[HireDate]	TEXT,
 	[SeniorityCode]	INTEGER,
-	FOREIGN KEY([PersonId]) REFERENCES [People]([Id])
+	FOREIGN KEY([PersonId]) REFERENCES [People]([Id]),
+PRIMARY KEY([PersonId])
 );
 
 
-CREATE TABLE [Warehouse] (
+CREATE TABLE [Warehouses] (
 	[WarehouseId]	INTEGER,
 	[LocationId]	INTEGER,
 	[WarehouseName]	TEXT,
-	FOREIGN KEY([WarehouseId]) REFERENCES [Inventory]([WarehouseId]),
-	FOREIGN KEY([LocationId]) REFERENCES [Location]([LocationId])
-); ";  
+	FOREIGN KEY([WarehouseId]) REFERENCES [Inventories]([WarehouseId]),
+	FOREIGN KEY([LocationId]) REFERENCES [Locations]([LocationId]),
+PRIMARY KEY([WarehouseId])
+);";
                         command.CommandText = allTablesAutomated;
                         command.CommandType = System.Data.CommandType.Text;
                         command.ExecuteNonQuery();
@@ -278,7 +272,7 @@ CREATE TABLE [Warehouse] (
             }
 
             dataBase = new ApplicationContext();
-            dataBase.People.Load();
+            
             dataBase.Countries.Load();
             dataBase.Customers.Load();
             dataBase.CustomerCompanies.Load();
@@ -289,12 +283,13 @@ CREATE TABLE [Warehouse] (
             dataBase.Locations.Load();
             dataBase.OrderItems.Load();
             dataBase.Orders.Load();
+            dataBase.People.Load();
             dataBase.PersonLocations.Load();
             dataBase.PhoneNumbers.Load();
             dataBase.Products.Load();
             dataBase.RestrictedInfo.Load();
             dataBase.Warehouses.Load();
-
+            
             Update();
         }
 
@@ -323,7 +318,7 @@ CREATE TABLE [Warehouse] (
         [HttpPut] public void Edit(int id, [FromBody]Customer obj) { if (id == obj.CustomerId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
         [HttpPut] public void Edit(int id, [FromBody]CustomerCompany obj) { if (id == obj.CompanyId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
         [HttpPut] public void Edit(int id, [FromBody]CustomerEmployee obj) { if (id == obj.CustomerEmployeeId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Employment obj) { if (id == obj.EmployeeID) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Employment obj) { if (id == obj.EmployeeId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
         [HttpPut] public void Edit(int id, [FromBody]EmploymentJobs obj) { if (id == obj.HRJobId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
         [HttpPut] public void Edit(int id, [FromBody]Inventory obj) { if (id == obj.InventoryId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
         [HttpPut] public void Edit(int id, [FromBody]Location obj) { if (id == obj.LocationId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
@@ -380,7 +375,7 @@ CREATE TABLE [Warehouse] (
         public Customer GetCustomerId(int id) { Customer obj = null; foreach (Customer o in dataBase.Customers) { if (o.CustomerId == id) { obj = o; break; } } return obj; }
         public CustomerCompany GetCustomerCompanyId(int id) { CustomerCompany obj = null; foreach (CustomerCompany o in dataBase.CustomerCompanies) { if (o.CompanyId == id) { obj = o; break; } } return obj; }
         public CustomerEmployee GetCustomerEmployeeId(int id) { CustomerEmployee obj = null; foreach (CustomerEmployee o in dataBase.CustomerEmployees) { if (o.CustomerEmployeeId == id) { obj = o; break; } } return obj; }
-        public Employment GetEmploymentId(int id) { Employment obj = null; foreach (Employment o in dataBase.Employments) { if (o.EmployeeID == id) { obj = o; break; } } return obj; }
+        public Employment GetEmploymentId(int id) { Employment obj = null; foreach (Employment o in dataBase.Employments) { if (o.EmployeeId == id) { obj = o; break; } } return obj; }
         public EmploymentJobs GetEmploymentJobsId(int id) { EmploymentJobs obj = null; foreach (EmploymentJobs o in dataBase.EmploymentJobs) { if (o.HRJobId == id) { obj = o; break; } } return obj; }
         public Inventory GetInventoryId(int id) { Inventory obj = null; foreach (Inventory o in dataBase.Inventories) { if (o.InventoryId == id) { obj = o; break; } } return obj; }
         public Location GetLocationId(int id) { Location obj = null; foreach (Location o in dataBase.Locations) { if (o.LocationId == id) { obj = o; break; } } return obj; }

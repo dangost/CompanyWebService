@@ -14,7 +14,7 @@ namespace WebService
     {
         protected void Application_Start()
         {
-            new SQLiteServiceBase();
+            //new SQLiteServiceBase();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
