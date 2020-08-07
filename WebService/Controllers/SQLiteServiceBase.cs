@@ -311,20 +311,330 @@ PRIMARY KEY([WarehouseId])
 
 
         // <EDIT>
-        [HttpPut] public void Edit(int id, [FromBody]Country obj) { if (id == obj.CountryId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Customer obj) { if (id == obj.CustomerId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]CustomerCompany obj) { if (id == obj.CompanyId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]CustomerEmployee obj) { if (id == obj.CustomerEmployeeId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Employment obj) { if (id == obj.EmployeeId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]EmploymentJobs obj) { if (id == obj.HRJobId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Inventory obj) { if (id == obj.InventoryId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Location obj) { if (id == obj.LocationId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]OrderItem obj) { if (id == obj.OrderItemId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Orders obj) { if (id == obj.OrderId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Person obj) { if (id == obj.Id) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]PhoneNumber obj) { if (id == obj.PhoneNumberId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Product obj) { if (id == obj.ProductId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
-        [HttpPut] public void Edit(int id, [FromBody]Warehouse obj) { if (id == obj.WarehouseId) { dataBase.Entry(obj).State = EntityState.Modified; Update(); } }
+        [HttpPut] public void Edit(int id, [FromBody]Country obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath;
+                connection.Open();
+
+                using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"UPDATE Countries
+            
+            SET CountryName = '" + obj.CountryName + @"', CountryCode = '" + obj.CountryCode + @"', NatLangCode = " + obj.NatLangCode + @", CurrencyCode = '" + obj.CurrencyCode + @"'
+            WHERE CountryId = " + id + @";" ;
+
+                    command.CommandText = sqlQuerry;
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        [HttpPut]
+        public void Edit(int id, [FromBody]Customer obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"
+UPDATE Customers 
+SET
+CustomerEmployeeId = " + obj.CustomerEmployeeId + @",
+AccountMgrId = '" + obj.AccountMgrId + @"'
+WHERE
+CustomerId = " + id + @";
+";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]CustomerCompany obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"UPDATE CustomerCompanies 
+SET
+CompanyName = '" + obj.CompanyName + @"',
+CompanyCreditLimit = " + obj.CompanyCreditLimit + @",
+CreditLimitCurrency = '"+obj.CreditLimitCurrency+ @"'
+WHERE
+CompanyId = " + id + @";
+";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]CustomerEmployee obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"UPDATE CustomerEmployees
+SET
+BadgeNumber = '" + obj.BadgeNumber + @"',
+JobTitle = '" + obj.JobTitle + @"',
+Department = '" + obj.Department + @"',
+CreditLimit = " + obj.CreditLimit + @",
+CreditLimitCurrency = " + obj.CreditLimitCurrency + @"
+WHERE
+CustomerEmployeeId = " + id + @";
+";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]Employment obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"UPDATE Employments
+SET
+StartDate = '" + obj.StartDate + @"',
+EndDate = '" + obj.EndDate + @"',
+Salary = " + obj.Salary + @",
+CommissionPercent = '" + obj.CommissionPercent + @"',
+Employmentcol = '" + obj.Employmentcol + @"'
+WHERE
+EmployeeId = " + id + @";
+";
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]EmploymentJobs obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"
+UPDATE EmploymentJobs
+SET
+JobTitle = '" + obj.JobTitle + @"',
+MinSalary = " + obj.MinSalary + @",
+MaxSalary = " + obj.MaxSalary + @"
+WHERE
+HRJobId = " + id + @";
+";
+
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]Inventory obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"
+UPDATE EmploymentJobs
+SET
+WarehouseId = " + obj.WarehouseId + @",
+QuantityOnHand = " + obj.QuantityOnHand + @",
+QuantityAvaliable = " + obj.QuantityAvaliable + @"
+WHERE
+InventoryId = " + id + @";
+";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]Location obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"
+UPDATE Locations
+SET
+CountryId = " + obj.CountryId + @",
+AdressLine1 = '" + obj.AdressLine1 + @"',
+AdressLine2 = '" + obj.AdressLine2 + @"',
+City = '" + obj.City + @"',
+State = '" + obj.State + @"',
+District = '" + obj.District + @"',
+PostalCode = '" + obj.PostalCode + @"',
+LocationTypeCode = " + obj.LocationTypeCode + @",
+Description = '" + obj.Description + @"',
+ShippingNotes = '" + obj.ShippingNotes + @"'
+WHERE
+LocationId = " + id + @";
+";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]OrderItem obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+                    string sqlQuerry = @"
+UPDATE EmploymentJobs
+SET
+UnitPrice = " + obj.UnitPrice + @",
+Quantity = " + obj.Quantity + @"
+WHERE
+OrderItemId = " + id + @";";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]Orders obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"
+UPDATE Locations
+SET
+OrderDate = '" + obj.OrderDate + @"',
+OrderCode = " + obj.OrderCode + @",
+OrderStatus = '" + obj.OrderStatus + @"',
+OrderTotal = " + obj.OrderTotal + @",
+OrderCurrency = '" + obj.OrderCurrency + @"',
+PromotionCode = '" + obj.PromotionCode + @"'
+WHERE
+OrderId = " + id + @";
+";
+
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]Person obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+                    string sqlQuerry = @"
+UPDATE Locations
+SET
+FirstName = '" + obj.FirstName + @"',
+LastName = э" + obj.LastName + @",
+MiddleName = '" + obj.MiddleName + @"',
+Nickname = '" + obj.Nickname + @"',
+NatLangCode = " + obj.NatLangCode + @",
+Gender = '" + obj.Gender + @"',
+CultureCode = " + obj.CultureCode + @"
+WHERE
+Id = " + id + @";";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]PhoneNumber obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"
+UPDATE Locations
+SET
+Phonenumber = " + obj.Phonenumber + @",
+CountryCode = " + obj.CountryCode + @",
+PhoneType = " + obj.PhoneType + @"
+WHERE
+PhoneNumberId = " + id + @";";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]Product obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"
+UPDATE Locations
+SET
+ProductName = '" + obj.ProductName + @"',
+Description = '" + obj.Description + @"',
+Category = " + obj.Category + @",
+WeightClass = " + obj.WeightClass + @",
+WarrantlyPeriod = " + obj.WarrantlyPeriod + @",
+SupplierId  = " + obj.SupplierId + @",
+Status = '" + obj.Status + @"',
+ListPrice = " + obj.ListPrice + @",
+MinimumPrice = " + obj.MinimumPrice + @",
+PriceCurrency = '" + obj.PriceCurrency + @"',
+CatalogURL = '" + obj.CatalogURL + @"',
+
+WHERE
+ProductId = " + id + @";";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+        [HttpPut]
+        public void Edit(int id, [FromBody]Warehouse obj)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection())
+            {
+                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+
+                    string sqlQuerry = @"
+UPDATE Locations
+SET
+WarehouseName = '" + obj.WarehouseName + @"'
+WHERE
+PhoneNumberId = " + id + @";";
+
+                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
+                }
+            }
+        }
+
         // </EDIT>
 
 
