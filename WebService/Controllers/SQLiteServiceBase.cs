@@ -453,7 +453,7 @@ HRJobId = " + id + @";
                 {
 
                     string sqlQuerry = @"
-UPDATE EmploymentJobs
+UPDATE Inventories
 SET
 WarehouseId = " + obj.WarehouseId + @",
 QuantityOnHand = " + obj.QuantityOnHand + @",
@@ -523,7 +523,7 @@ OrderItemId = " + id + @";";
                 {
 
                     string sqlQuerry = @"
-UPDATE Locations
+UPDATE Orders
 SET
 OrderDate = '" + obj.OrderDate + @"',
 OrderCode = " + obj.OrderCode + @",
@@ -548,7 +548,7 @@ OrderId = " + id + @";
                 connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
                 {
                     string sqlQuerry = @"
-UPDATE Locations
+UPDATE People
 SET
 FirstName = '" + obj.FirstName + @"',
 LastName = э" + obj.LastName + @",
@@ -573,7 +573,7 @@ Id = " + id + @";";
                 {
 
                     string sqlQuerry = @"
-UPDATE Locations
+UPDATE PhoneNumbers
 SET
 Phonenumber = " + obj.Phonenumber + @",
 CountryCode = " + obj.CountryCode + @",
@@ -594,7 +594,7 @@ PhoneNumberId = " + id + @";";
                 {
 
                     string sqlQuerry = @"
-UPDATE Locations
+UPDATE Products
 SET
 ProductName = '" + obj.ProductName + @"',
 Description = '" + obj.Description + @"',
@@ -624,11 +624,11 @@ ProductId = " + id + @";";
                 {
 
                     string sqlQuerry = @"
-UPDATE Locations
+UPDATE Warehouses
 SET
 WarehouseName = '" + obj.WarehouseName + @"'
 WHERE
-PhoneNumberId = " + id + @";";
+WarehouseId = " + id + @";";
 
                     command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
                 }
