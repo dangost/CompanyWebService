@@ -9,10 +9,13 @@ namespace WebService.Models
 
         public int ProductId { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int WarehouseId { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int QuantityOnHand { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int QuantityAvaliable { get; set; }
     }
 }

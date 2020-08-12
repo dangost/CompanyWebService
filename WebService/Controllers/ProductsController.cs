@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using WebService.Models;
+using System;
 
 namespace WebService.Controllers
 {
@@ -15,10 +16,38 @@ namespace WebService.Controllers
         public Product Get(int id) { return db.GetProductId(id); }
 
         // POST api/Products
-        public void Post([FromBody]Product value) { db.Add(value);}
+        public IHttpActionResult Post([FromBody]Product value)
+        {
+            try
+            {
+                db.Add(value);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(nameof(Product), ex.Message);
+
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
 
         // PUT api/Products/{id}
-        public void Put(int id, [FromBody]Product value) { db.Edit(id, value); }
+        public IHttpActionResult Put(int id, [FromBody]Product value)
+        {
+            try
+            {
+                db.Edit(id,value);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(nameof(Product), ex.Message);
+
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
 
         // DELETE api/Products/{id}
         public void Delete(int id) { db.DeleteProduct(id); }

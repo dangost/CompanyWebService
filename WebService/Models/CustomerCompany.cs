@@ -7,10 +7,13 @@ namespace WebService.Models
         [Key]
         public int CompanyId { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public string CompanyName { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int CompanyCreditLimit { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public string CreditLimitCurrency { get; set; }
     }
 }

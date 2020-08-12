@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using WebService.Models;
+using System;
 
 namespace WebService.Controllers
 {
@@ -15,10 +16,38 @@ namespace WebService.Controllers
         public EmploymentJobs Get(int id) { return db.GetEmploymentJobsId(id); }
 
         // POST api/EmploymentJobs
-        public void Post([FromBody]EmploymentJobs value) { db.Add(value);}
+        public IHttpActionResult Post([FromBody]EmploymentJobs value)
+        {
+            try
+            {
+                db.Add(value);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(nameof(EmploymentJobs), ex.Message);
+
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
 
         // PUT api/EmploymentJobs/{id}
-        public void Put(int id, [FromBody]EmploymentJobs value) { db.Edit(id, value); }
+        public IHttpActionResult Put(int id, [FromBody]EmploymentJobs value)
+        {
+            try
+            {
+                db.Edit(id,value);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(nameof(EmploymentJobs), ex.Message);
+
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
 
         // DELETE api/EmploymentJobs/{id}
         public void Delete(int id) { db.DeleteEmploymentJobs(id); }

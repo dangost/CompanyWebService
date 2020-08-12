@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
+using System.Linq;
 using WebService.Models;
 using System.Web.Http;
+using System;
 using Dapper;
 
 namespace WebService.Controllers
@@ -311,329 +313,299 @@ PRIMARY KEY([WarehouseId])
 
 
         // <EDIT>
-        [HttpPut] public void Edit(int id, [FromBody]Country obj)
+        [HttpPut]
+        public void Edit(int id, [FromBody]Country obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath;
-                connection.Open();
-
-                using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
-
-                    string sqlQuerry = @"UPDATE Countries
-            
-            SET CountryName = '" + obj.CountryName + @"', CountryCode = '" + obj.CountryCode + @"', NatLangCode = " + obj.NatLangCode + @", CurrencyCode = '" + obj.CurrencyCode + @"'
-            WHERE CountryId = " + id + @";" ;
-
-                    command.CommandText = sqlQuerry;
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.ExecuteNonQuery();
-                }
+                var temp = context.Countries.FirstOrDefault(_ => _.CountryId == id);
+                try { if (temp != null) {
+                        temp.CountryName = obj.CountryName;
+                        temp.CountryCode = obj.CountryCode;
+                        temp.NatLangCode = obj.NatLangCode;
+                        temp.CurrencyCode = obj.CurrencyCode;
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
-
 
         [HttpPut]
         public void Edit(int id, [FromBody]Customer obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
-
-                    string sqlQuerry = @"
-UPDATE Customers 
-SET
-CustomerEmployeeId = " + obj.CustomerEmployeeId + @",
-AccountMgrId = '" + obj.AccountMgrId + @"'
-WHERE
-CustomerId = " + id + @";
-";
-
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                var temp = context.Customers.FirstOrDefault(_ => _.CustomerId == id);
+                try { if (temp != null) {
+                        temp.AccountMgrId = obj.AccountMgrId;
+                        temp.IncomeLevel = obj.IncomeLevel;
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]CustomerCompany obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.CustomerCompanies.FirstOrDefault(_ => _.CompanyId == id);
+                try { if (temp != null) {
+                        temp.CompanyName = obj.CompanyName;
+                        temp.CreditLimitCurrency = obj.CreditLimitCurrency;
+                        temp.CompanyCreditLimit = obj.CompanyCreditLimit;
 
-                    string sqlQuerry = @"UPDATE CustomerCompanies 
-SET
-CompanyName = '" + obj.CompanyName + @"',
-CompanyCreditLimit = " + obj.CompanyCreditLimit + @",
-CreditLimitCurrency = '"+obj.CreditLimitCurrency+ @"'
-WHERE
-CompanyId = " + id + @";
-";
-
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]CustomerEmployee obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.CustomerEmployees.FirstOrDefault(_ => _.CustomerEmployeeId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"UPDATE CustomerEmployees
-SET
-BadgeNumber = '" + obj.BadgeNumber + @"',
-JobTitle = '" + obj.JobTitle + @"',
-Department = '" + obj.Department + @"',
-CreditLimit = " + obj.CreditLimit + @",
-CreditLimitCurrency = " + obj.CreditLimitCurrency + @"
-WHERE
-CustomerEmployeeId = " + id + @";
-";
+                        temp.BadgeNumber = obj.BadgeNumber;
+                        temp.JobTitle = obj.JobTitle;
+                        temp.Department = obj.Department;
+                        temp.CreditLimit = obj.CreditLimit;
+                        temp.CreditLimitCurrency = obj.CreditLimitCurrency;
 
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]Employment obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.Employments.FirstOrDefault(_ => _.EmployeeId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"UPDATE Employments
-SET
-StartDate = '" + obj.StartDate + @"',
-EndDate = '" + obj.EndDate + @"',
-Salary = " + obj.Salary + @",
-CommissionPercent = '" + obj.CommissionPercent + @"',
-Employmentcol = '" + obj.Employmentcol + @"'
-WHERE
-EmployeeId = " + id + @";
-";
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        temp.StartDate = obj.StartDate;
+                        temp.EndDate = obj.EndDate;
+                        temp.Salary = temp.Salary;
+                        temp.CommissionPercent = temp.CommissionPercent;
+                        temp.Employmentcol = obj.Employmentcol;
+
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]EmploymentJobs obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.EmploymentJobs.FirstOrDefault(_ => _.HRJobId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"
-UPDATE EmploymentJobs
-SET
-JobTitle = '" + obj.JobTitle + @"',
-MinSalary = " + obj.MinSalary + @",
-MaxSalary = " + obj.MaxSalary + @"
-WHERE
-HRJobId = " + id + @";
-";
+                        temp.JobTitle = obj.JobTitle;
+                        temp.MinSalary = obj.MinSalary;
+                        temp.MaxSalary = obj.MaxSalary;
 
-
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]Inventory obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.Inventories.FirstOrDefault(_ => _.InventoryId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"
-UPDATE Inventories
-SET
-WarehouseId = " + obj.WarehouseId + @",
-QuantityOnHand = " + obj.QuantityOnHand + @",
-QuantityAvaliable = " + obj.QuantityAvaliable + @"
-WHERE
-InventoryId = " + id + @";
-";
+                        temp.WarehouseId = obj.WarehouseId;
+                        temp.QuantityOnHand = obj.QuantityOnHand;
+                        temp.QuantityAvaliable = obj.QuantityAvaliable;
 
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]Location obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.Locations.FirstOrDefault(_ => _.LocationId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"
-UPDATE Locations
-SET
-CountryId = " + obj.CountryId + @",
-AdressLine1 = '" + obj.AdressLine1 + @"',
-AdressLine2 = '" + obj.AdressLine2 + @"',
-City = '" + obj.City + @"',
-State = '" + obj.State + @"',
-District = '" + obj.District + @"',
-PostalCode = '" + obj.PostalCode + @"',
-LocationTypeCode = " + obj.LocationTypeCode + @",
-Description = '" + obj.Description + @"',
-ShippingNotes = '" + obj.ShippingNotes + @"'
-WHERE
-LocationId = " + id + @";
-";
+                        temp.CountryId = obj.CountryId;
+                        temp.AdressLine1 = obj.AdressLine1;
+                        temp.AdressLine2 = obj.AdressLine2;
+                        temp.City = obj.City;
+                        temp.State = obj.State;
+                        temp.District = obj.District;
+                        temp.PostalCode = obj.PostalCode;
+                        temp.Description = obj.Description;
+                        temp.LocationTypeCode = obj.LocationTypeCode;
+                        temp.ShippingNotes = obj.ShippingNotes;
 
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]OrderItem obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
-                    string sqlQuerry = @"
-UPDATE EmploymentJobs
-SET
-UnitPrice = " + obj.UnitPrice + @",
-Quantity = " + obj.Quantity + @"
-WHERE
-OrderItemId = " + id + @";";
+                var temp = context.OrderItems.FirstOrDefault(_ => _.OrderItemId == id);
+                try { if (temp != null) {
 
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        temp.UnitPrice = obj.UnitPrice;
+                        temp.Quantity = obj.Quantity;
+
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]Orders obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.Orders.FirstOrDefault(_ => _.OrderId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"
-UPDATE Orders
-SET
-OrderDate = '" + obj.OrderDate + @"',
-OrderCode = " + obj.OrderCode + @",
-OrderStatus = '" + obj.OrderStatus + @"',
-OrderTotal = " + obj.OrderTotal + @",
-OrderCurrency = '" + obj.OrderCurrency + @"',
-PromotionCode = '" + obj.PromotionCode + @"'
-WHERE
-OrderId = " + id + @";
-";
+                        temp.OrderDate = obj.OrderDate;
+                        temp.OrderCode = obj.OrderCode;
+                        temp.OrderStatus = obj.OrderStatus;
+                        temp.OrderTotal = obj.OrderTotal;
+                        temp.OrderCurrency = obj.OrderCurrency;
+                        temp.PromotionCode = obj.PromotionCode;
 
-
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]Person obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
-                    string sqlQuerry = @"
-UPDATE People
-SET
-FirstName = '" + obj.FirstName + @"',
-LastName = э" + obj.LastName + @",
-MiddleName = '" + obj.MiddleName + @"',
-Nickname = '" + obj.Nickname + @"',
-NatLangCode = " + obj.NatLangCode + @",
-Gender = '" + obj.Gender + @"',
-CultureCode = " + obj.CultureCode + @"
-WHERE
-Id = " + id + @";";
+                var temp = context.People.FirstOrDefault(_ => _.Id == id);
+                try { if (temp != null) {
 
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        temp.FirstName = obj.FirstName;
+                        temp.LastName = obj.LastName;
+                        temp.MiddleName = obj.MiddleName;
+                        temp.Nickname = obj.Nickname;
+                        temp.NatLangCode = obj.NatLangCode;
+                        temp.CultureCode = obj.CultureCode;
+                        temp.Gender = obj.Gender;
+
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
+        [HttpPut]
+        public void Edit(int id, [FromBody]PersonLocation obj)
+        {
+            using (var context = new ApplicationContext())
+            {
+                var temp = context.PersonLocations.FirstOrDefault(_ => _.PersonsPersonId == id);
+                try { if (temp != null) {
+
+                        temp.SubAdress = obj.SubAdress;
+                        temp.LocationUsage = obj.LocationUsage;
+                        temp.Notes = obj.Notes;
+
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
+            }
+        }
+
         [HttpPut]
         public void Edit(int id, [FromBody]PhoneNumber obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.PhoneNumbers.FirstOrDefault(_ => _.PhoneNumberId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"
-UPDATE PhoneNumbers
-SET
-Phonenumber = " + obj.Phonenumber + @",
-CountryCode = " + obj.CountryCode + @",
-PhoneType = " + obj.PhoneType + @"
-WHERE
-PhoneNumberId = " + id + @";";
+                        temp.Phonenumber = obj.Phonenumber;
+                        temp.CountryCode = obj.CountryCode;
+                        temp.PhoneType = obj.PhoneType;
 
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
         [HttpPut]
         public void Edit(int id, [FromBody]Product obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"
-UPDATE Products
-SET
-ProductName = '" + obj.ProductName + @"',
-Description = '" + obj.Description + @"',
-Category = " + obj.Category + @",
-WeightClass = " + obj.WeightClass + @",
-WarrantlyPeriod = " + obj.WarrantlyPeriod + @",
-SupplierId  = " + obj.SupplierId + @",
-Status = '" + obj.Status + @"',
-ListPrice = " + obj.ListPrice + @",
-MinimumPrice = " + obj.MinimumPrice + @",
-PriceCurrency = '" + obj.PriceCurrency + @"',
-CatalogURL = '" + obj.CatalogURL + @"',
+                        temp.ProductName = obj.ProductName;
+                        temp.Description = obj.Description;
+                        temp.Category = obj.Category;
+                        temp.WeightClass = obj.WeightClass;
+                        temp.WarrantlyPeriod = obj.WarrantlyPeriod;
+                        temp.SupplierId = obj.SupplierId;
+                        temp.Status = obj.Status;
+                        temp.ListPrice = obj.ListPrice;
+                        temp.MinimumPrice = obj.MinimumPrice;
+                        temp.PriceCurrency = obj.PriceCurrency;
+                        temp.CatalogURL = obj.CatalogURL;
 
-WHERE
-ProductId = " + id + @";";
-
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
+        [HttpPut]
+        public void Edit(int id, [FromBody]RestrictedInfo obj)
+        {
+            using (var context = new ApplicationContext())
+            {
+                var temp = context.RestrictedInfo.FirstOrDefault(_ => _.PersonId == id);
+                try { if (temp != null) {
+
+                        temp.DateOfBirth = obj.DateOfBirth;
+                        temp.DateOfDeath = obj.DateOfDeath;
+                        temp.GovernmentId = obj.GovernmentId;
+                        temp.PassportId = obj.PassportId;
+                        temp.HireDire = obj.HireDire;
+                        temp.SeniorityCode = obj.SeniorityCode;
+
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
+            }
+        }
+
         [HttpPut]
         public void Edit(int id, [FromBody]Warehouse obj)
         {
-            using (SQLiteConnection connection = new SQLiteConnection())
+            using (var context = new ApplicationContext())
             {
-                connection.ConnectionString = "Data Source = " + sqLitePath; connection.Open(); using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
+                var temp = context.Warehouses.FirstOrDefault(_ => _.WarehouseId == id);
+                try { if (temp != null) {
 
-                    string sqlQuerry = @"
-UPDATE Warehouses
-SET
-WarehouseName = '" + obj.WarehouseName + @"'
-WHERE
-WarehouseId = " + id + @";";
+                        temp.WarehouseName = obj.WarehouseName;
 
-                    command.CommandText = sqlQuerry; command.CommandType = System.Data.CommandType.Text; command.ExecuteNonQuery();
-                }
+                        context.SaveChanges(); } }
+                catch (Exception) { /*TO DO*/ }
             }
         }
+
 
         // </EDIT>
 

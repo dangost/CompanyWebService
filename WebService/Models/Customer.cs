@@ -10,8 +10,10 @@ namespace WebService.Models
 
         public int CustomerEmployeeId { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int AccountMgrId { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int IncomeLevel { get; set; }
     }
 }

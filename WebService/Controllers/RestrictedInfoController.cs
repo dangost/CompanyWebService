@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using WebService.Models;
+using System;
 
 namespace WebService.Controllers
 {
@@ -15,10 +16,38 @@ namespace WebService.Controllers
         //public RestrictedInfo Get(int id) { return db.GetRestrictedInfoId(id); }
 
         // POST api/RestrictedInfo
-        public void Post([FromBody]RestrictedInfo value) { db.Add(value);}
+        public IHttpActionResult Post([FromBody]RestrictedInfo value)
+        {
+            try
+            {
+                db.Add(value);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(nameof(RestrictedInfo), ex.Message);
+
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
 
         // PUT api/RestrictedInfo/{id}
-        //public void Put(int id, [FromBody]RestrictedInfo value) { db.Edit(id, value); }
+        public IHttpActionResult Put(int id, [FromBody]RestrictedInfo value)
+        {
+            try
+            {
+                db.Edit(id,value);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(nameof(RestrictedInfo), ex.Message);
+
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
 
         // DELETE api/RestrictedInfo/{id}
         public void Delete(int id) { db.DeleteRestrictedInfo(id); }

@@ -11,8 +11,10 @@ namespace WebService.Models
 
         public int ProductId { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public double UnitPrice { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public double Quantity { get; set; }
     }
 }

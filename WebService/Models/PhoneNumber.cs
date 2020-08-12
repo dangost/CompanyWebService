@@ -11,10 +11,13 @@ namespace WebService.Models
 
         public int LocationsLocationId { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int Phonenumber { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int CountryCode { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public int PhoneType { get; set; }
     }
 }

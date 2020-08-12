@@ -9,10 +9,13 @@ namespace WebService.Models
 
         public int LocationsLocationId { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public string SubAdress { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public string LocationUsage { get; set; }
 
+        [Required(ErrorMessage = "Input the value")]
         public string Notes { get; set; }
     }
 }
