@@ -40,5 +40,4 @@ namespace WebService.Models
         [Required(ErrorMessage = "Input the value")]
         public int CountriesCountryId { get; set; }
     }
-
 }

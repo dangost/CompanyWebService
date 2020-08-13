@@ -7,7 +7,7 @@ namespace WebService.Controllers
 {
     public class CountriesController : ApiController
     {
-        SQLiteServiceBase db = new SQLiteServiceBase();
+        public SQLiteServiceBase db = new SQLiteServiceBase();
 
         // GET api/Countries
         public IEnumerable<Country> Get() { return db.GetCountries(); }

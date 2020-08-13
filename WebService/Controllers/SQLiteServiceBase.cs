@@ -13,7 +13,7 @@ namespace WebService.Controllers
     public class SQLiteServiceBase : ApiController
     {
         public SQLiteServiceBase()
-        {
+        {            
             Load();
         }
 
@@ -40,9 +40,9 @@ namespace WebService.Controllers
             public DbSet<RestrictedInfo> RestrictedInfo { get; set; }
             public DbSet<Warehouse> Warehouses { get; set; }
         }
-        
 
-        ApplicationContext dataBase = new ApplicationContext();
+
+        ApplicationContext dataBase;
 
         string sqLitePath = @"db\company.db";
 
@@ -271,7 +271,7 @@ PRIMARY KEY([WarehouseId])
             }
 
             dataBase = new ApplicationContext();
-            
+
             dataBase.Countries.Load();
             dataBase.Customers.Load();
             dataBase.CustomerCompanies.Load();
