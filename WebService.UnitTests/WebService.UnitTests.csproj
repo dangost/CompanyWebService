@@ -69,8 +69,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="CountriesTests.cs" />
+    <Compile Include="CustomerCompaniesTests.cs" />
+    <Compile Include="CustomerEmployeesTests.cs" />
+    <Compile Include="CustomersTests.cs" />
+    <Compile Include="EmploymentJobsTests.cs" />
+    <Compile Include="EmploymentsTests.cs" />
+    <Compile Include="InventoriesTests.cs" />
+    <Compile Include="LocationsTests.cs" />
+    <Compile Include="OrderItemsTests.cs" />
+    <Compile Include="OrdersTests.cs" />
+    <Compile Include="PeopleTests.cs" />
+    <Compile Include="PersonLocationsTests.cs" />
+    <Compile Include="PhoneNumbersTests.cs" />
+    <Compile Include="ProductsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestrictedInfoTests.cs" />
+    <Compile Include="WarehousesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
