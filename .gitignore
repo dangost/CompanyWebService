@@ -353,4 +353,6 @@ MigrationBackup/
 bin/
 packages/
 obj/
+venv/
+.idea/
 
