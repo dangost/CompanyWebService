@@ -7,7 +7,7 @@ namespace WebService.Controllers
 {
     public class CustomerEmployeesController : ApiController
     {
-        SQLiteServiceBase db = new SQLiteServiceBase();
+        IRepository db = new SQLiteServiceBase();
 
         // GET api/CustomerEmployees
         public IEnumerable<CustomerEmployee> Get() { return db.GetCustomerEmployees(); }

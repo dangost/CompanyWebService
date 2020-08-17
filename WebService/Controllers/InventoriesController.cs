@@ -7,7 +7,7 @@ namespace WebService.Controllers
 {
     public class InventoriesController : ApiController
     {
-        SQLiteServiceBase db = new SQLiteServiceBase();
+        IRepository db = new SQLiteServiceBase();
 
         // GET api/Inventories
         public IEnumerable<Inventory> Get() { return db.GetInventories(); }

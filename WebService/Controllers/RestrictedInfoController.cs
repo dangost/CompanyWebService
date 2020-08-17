@@ -7,7 +7,7 @@ namespace WebService.Controllers
 {
     public class RestrictedInfoController : ApiController
     {
-        SQLiteServiceBase db = new SQLiteServiceBase();
+        IRepository db = new SQLiteServiceBase();
 
         // GET api/RestrictedInfo
         public IEnumerable<RestrictedInfo> Get() { return db.GetRestrictedInfo(); }

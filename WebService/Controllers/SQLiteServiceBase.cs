@@ -10,7 +10,7 @@ using Dapper;
 
 namespace WebService.Controllers
 {
-    public class SQLiteServiceBase
+    public class SQLiteServiceBase : IRepository
     {
         public SQLiteServiceBase()
         {            
@@ -20,7 +20,7 @@ namespace WebService.Controllers
         public class ApplicationContext : DbContext
         {
             public ApplicationContext() : base("DefaultConnection")
-            {
+            {                
             }
             
             public DbSet<Country> Countries { get; set; }
@@ -46,8 +46,10 @@ namespace WebService.Controllers
 
         string sqLitePath = @"db\company.db";
 
-        void Load()
+        public void Load()
         {
+            File.Delete(sqLitePath);
+
             if(!File.Exists(sqLitePath))
             {
                 if(!Directory.Exists(@"db"))
@@ -267,7 +269,9 @@ PRIMARY KEY([WarehouseId])
                         command.ExecuteNonQuery();
                     }
                     connection.Close();
-                }                
+                }
+
+                
             }
 
             dataBase = new ApplicationContext();
@@ -663,9 +667,27 @@ PRIMARY KEY([WarehouseId])
         public Warehouse GetWarehouseId(int id) { Warehouse obj = null; foreach (Warehouse o in dataBase.Warehouses) { if (o.WarehouseId == id) { obj = o; break; } } return obj; }
         // </GETID>
 
-        void Update()
+        public void Update()
         {
             dataBase.SaveChanges();
+        }
+
+
+        protected void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (dataBase != null)
+                {
+                    dataBase.Dispose();
+                    dataBase = null;
+                }
+            }
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

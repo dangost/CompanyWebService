@@ -7,7 +7,7 @@ namespace WebService.Controllers
 {
     public class EmploymentJobsController : ApiController
     {
-        SQLiteServiceBase db = new SQLiteServiceBase();
+        IRepository db = new SQLiteServiceBase();
 
         // GET api/EmploymentJobs
         public IEnumerable<EmploymentJobs> Get() { return db.GetEmploymentJobs(); }
