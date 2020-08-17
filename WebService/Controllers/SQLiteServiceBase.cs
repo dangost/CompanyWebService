@@ -10,7 +10,7 @@ using Dapper;
 
 namespace WebService.Controllers
 {
-    public class SQLiteServiceBase : ApiController
+    public class SQLiteServiceBase
     {
         public SQLiteServiceBase()
         {            
@@ -293,28 +293,28 @@ PRIMARY KEY([WarehouseId])
         }
 
         // <ADD>
-        [HttpPost] public void Add([FromBody]Country obj) { dataBase.Countries.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]Customer obj) { dataBase.Customers.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]CustomerCompany obj) { dataBase.CustomerCompanies.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]CustomerEmployee obj) { dataBase.CustomerEmployees.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]Employment obj) { dataBase.Employments.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]EmploymentJobs obj) { dataBase.EmploymentJobs.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]Inventory obj) { dataBase.Inventories.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]Location obj) { dataBase.Locations.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]OrderItem obj) { dataBase.OrderItems.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]Orders obj) { dataBase.Orders.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]Person obj) { dataBase.People.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]PersonLocation obj) { dataBase.PersonLocations.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]PhoneNumber obj) { dataBase.PhoneNumbers.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]Product obj) { dataBase.Products.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]RestrictedInfo obj) { dataBase.RestrictedInfo.Add(obj); Update(); }
-        [HttpPost] public void Add([FromBody]Warehouse obj) { dataBase.Warehouses.Add(obj); Update(); }
+        public void Add(Country obj) { dataBase.Countries.Add(obj); Update(); }
+        public void Add(Customer obj) { dataBase.Customers.Add(obj); Update(); }
+        public void Add(CustomerCompany obj) { dataBase.CustomerCompanies.Add(obj); Update(); }
+        public void Add(CustomerEmployee obj) { dataBase.CustomerEmployees.Add(obj); Update(); }
+        public void Add(Employment obj) { dataBase.Employments.Add(obj); Update(); }
+        public void Add(EmploymentJobs obj) { dataBase.EmploymentJobs.Add(obj); Update(); }
+        public void Add(Inventory obj) { dataBase.Inventories.Add(obj); Update(); }
+        public void Add(Location obj) { dataBase.Locations.Add(obj); Update(); }
+        public void Add(OrderItem obj) { dataBase.OrderItems.Add(obj); Update(); }
+        public void Add(Orders obj) { dataBase.Orders.Add(obj); Update(); }
+        public void Add(Person obj) { dataBase.People.Add(obj); Update(); }
+        public void Add(PersonLocation obj) { dataBase.PersonLocations.Add(obj); Update(); }
+        public void Add(PhoneNumber obj) { dataBase.PhoneNumbers.Add(obj); Update(); }
+        public void Add(Product obj) { dataBase.Products.Add(obj); Update(); }
+        public void Add(RestrictedInfo obj) { dataBase.RestrictedInfo.Add(obj); Update(); }
+        public void Add(Warehouse obj) { dataBase.Warehouses.Add(obj); Update(); }
         // </ADD>
 
 
         // <EDIT>
-        [HttpPut]
-        public void Edit(int id, [FromBody]Country obj)
+        
+        public void Edit(int id, Country obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -329,8 +329,7 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]Customer obj)
+        public void Edit(int id, Customer obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -343,8 +342,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]CustomerCompany obj)
+        
+        public void Edit(int id, CustomerCompany obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -359,8 +358,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]CustomerEmployee obj)
+        
+        public void Edit(int id, CustomerEmployee obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -378,8 +377,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]Employment obj)
+        
+        public void Edit(int id, Employment obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -397,8 +396,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]EmploymentJobs obj)
+        
+        public void Edit(int id, EmploymentJobs obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -414,8 +413,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]Inventory obj)
+        
+        public void Edit(int id, Inventory obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -431,8 +430,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]Location obj)
+        
+        public void Edit(int id, Location obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -455,8 +454,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]OrderItem obj)
+        
+        public void Edit(int id, OrderItem obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -471,8 +470,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]Orders obj)
+        
+        public void Edit(int id, Orders obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -491,8 +490,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]Person obj)
+        
+        public void Edit(int id, Person obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -512,8 +511,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]PersonLocation obj)
+        
+        public void Edit(int id, PersonLocation obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -529,8 +528,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]PhoneNumber obj)
+        
+        public void Edit(int id, PhoneNumber obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -546,8 +545,8 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]Product obj)
+        
+        public void Edit(int id, Product obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -571,8 +570,7 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]RestrictedInfo obj)
+        public void Edit(int id, RestrictedInfo obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -591,8 +589,7 @@ PRIMARY KEY([WarehouseId])
             }
         }
 
-        [HttpPut]
-        public void Edit(int id, [FromBody]Warehouse obj)
+        public void Edit(int id, Warehouse obj)
         {
             using (var context = new ApplicationContext())
             {
@@ -669,15 +666,6 @@ PRIMARY KEY([WarehouseId])
         void Update()
         {
             dataBase.SaveChanges();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                dataBase.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

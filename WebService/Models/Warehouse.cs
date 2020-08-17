@@ -9,7 +9,7 @@ namespace WebService.Models
 
         public int LocationId { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the warehouse name")]
         public string WarehouseName { get; set; }
     }
 }

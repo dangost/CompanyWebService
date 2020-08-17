@@ -13,19 +13,19 @@ namespace WebService.Models
 
         public int ManagerEmployeeId { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the start date")]
         public string StartDate { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the end date")]
         public string EndDate { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the salary")]
         public int Salary { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the comission")]
         public string CommissionPercent { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the employment")]
         public string Employmentcol { get; set; }
     }
 }

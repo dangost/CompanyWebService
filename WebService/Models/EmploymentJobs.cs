@@ -9,13 +9,13 @@ namespace WebService.Models
 
         public int CountriesCountryId { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the job title")]
         public string JobTitle { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the min salary")]
         public int MinSalary { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the max salary")]
         public int MaxSalary { get; set; }
     }
 }

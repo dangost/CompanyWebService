@@ -11,22 +11,22 @@ namespace WebService.Models
 
         public int SalesRepId { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the order date")]
         public string OrderDate { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the order code")]
         public int OrderCode { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the order status")]
         public string OrderStatus { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the order total")]
         public int OrderTotal { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the order currency")]
         public string OrderCurrency { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the promotion code")]
         public string PromotionCode { get; set; }
     }
 }

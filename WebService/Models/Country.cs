@@ -7,16 +7,16 @@ namespace WebService.Models
         [Key]
         public int CountryId { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the coutry name")]
         public string CountryName { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the code")]
         public string CountryCode { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the code")]
         public int NatLangCode { get; set; }
 
-        [Required(ErrorMessage = "Input the value")]
+        [Required(ErrorMessage = "Input the currency")]
         public string CurrencyCode { get; set; }
     }
 }
