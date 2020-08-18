@@ -7,7 +7,7 @@ namespace WebService.Controllers
 {
     public class OrderItemsController : ApiController
     {
-        IRepository db = new SQLiteServiceBase();
+        IRepository db = RepositoryController.GetRepository();
 
         // GET api/OrderItems
         public IEnumerable<OrderItem> Get() { return db.GetOrderItems(); }

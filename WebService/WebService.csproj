@@ -216,6 +216,7 @@
     <Compile Include="Controllers\PersonLocationsController.cs" />
     <Compile Include="Controllers\PhoneNumbersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\RestrictedInfoController.cs" />
     <Compile Include="Controllers\SQLiteServiceBase.cs" />
     <Compile Include="Controllers\WarehousesController.cs" />
