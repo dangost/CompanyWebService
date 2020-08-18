@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            //Create DataBase();
+            SQLiteSupport.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,9 +52,7 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.WarehouseName = obj.WarehouseName;
 
                         context.SaveChanges();
                     }

@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            //Create DataBase();
+            SQLiteSupport.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,9 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.JobTitle = obj.JobTitle;
+                        temp.MinSalary = obj.MinSalary;
+                        temp.MaxSalary = obj.MaxSalary;
 
                         context.SaveChanges();
                     }
