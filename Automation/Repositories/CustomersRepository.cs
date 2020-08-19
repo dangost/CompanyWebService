@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,8 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.AccountMgrId = obj.AccountMgrId;
-                        temp.IncomeLevel = obj.IncomeLevel;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -77,7 +78,7 @@ namespace WebService.Realization
             return dataBase.Customers; 
         }
 
-        public Customer GetCustomersId(int id)
+        public Customer GetCustomerId(int id)
         { 
             Customer obj = null; 
             foreach (Customer o in dataBase.Customers) 

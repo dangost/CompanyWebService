@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class EmploymentsRepository : IEmploymentsRepository
     {
-        public ProductsRepository()
+        public EmploymentsRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<Employment> Employments { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.Employments.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(Employment obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.Employments.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, Employment obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.Employments.FirstOrDefault(_ => _.EmployeeId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteEmployment(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            Employment obj = dataBase.Employments.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.Employments.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Employment> GetEmployments()
         { 
-            return dataBase.Products; 
+            return dataBase.Employments; 
         }
 
-        public Product GetProductId(int id)
+        public Employment GetEmploymentId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            Employment obj = null; 
+            foreach (Employment o in dataBase.Employments) 
             { 
-                if (o.ProductId == id) 
+                if (o.EmployeeId == id) 
                 { 
                     obj = o; break; 
                 } 

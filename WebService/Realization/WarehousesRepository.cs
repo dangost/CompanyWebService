@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class WarehousesRepository : IWarehousesRepository
     {
-        public ProductsRepository()
+        public WarehousesRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<Warehouse> Warehouses { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.Warehouses.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(Warehouse obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.Warehouses.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, Warehouse obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.Warehouses.FirstOrDefault(_ => _.WarehouseId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteWarehouse(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            Warehouse obj = dataBase.Warehouses.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.Warehouses.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Warehouse> GetWarehouses()
         { 
-            return dataBase.Products; 
+            return dataBase.Warehouses; 
         }
 
-        public Product GetProductId(int id)
+        public Warehouse GetWarehouseId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            Warehouse obj = null; 
+            foreach (Warehouse o in dataBase.Warehouses) 
             { 
-                if (o.ProductId == id) 
+                if (o.WarehouseId == id) 
                 { 
                     obj = o; break; 
                 } 

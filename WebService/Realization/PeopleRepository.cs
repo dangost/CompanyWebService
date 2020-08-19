@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class PeopleRepository : IPeopleRepository
     {
-        public ProductsRepository()
+        public PeopleRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<Person> People { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.People.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(Person obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.People.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, Person obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.People.FirstOrDefault(_ => _.Id == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeletePerson(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            Person obj = dataBase.People.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.People.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Person> GetPeople()
         { 
-            return dataBase.Products; 
+            return dataBase.People; 
         }
 
-        public Product GetProductId(int id)
+        public Person GetPersonId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            Person obj = null; 
+            foreach (Person o in dataBase.People) 
             { 
-                if (o.ProductId == id) 
+                if (o.Id == id) 
                 { 
                     obj = o; break; 
                 } 

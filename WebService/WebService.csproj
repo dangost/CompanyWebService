@@ -169,6 +169,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\ICountriesRepository.cs" />
+    <Compile Include="Abstraction\ICustomerCompaniesRepository.cs" />
+    <Compile Include="Abstraction\ICustomerEmployeesRepository.cs" />
+    <Compile Include="Abstraction\ICustomersRepository.cs" />
+    <Compile Include="Abstraction\IEmploymentJobsRepository.cs" />
+    <Compile Include="Abstraction\IEmploymentsRepository.cs" />
+    <Compile Include="Abstraction\IInventoriesRepository.cs" />
+    <Compile Include="Abstraction\ILocationsRepository.cs" />
+    <Compile Include="Abstraction\IOrderItemsRepository.cs" />
+    <Compile Include="Abstraction\IOrdersRepository.cs" />
+    <Compile Include="Abstraction\IPeopleRepository.cs" />
+    <Compile Include="Abstraction\IPersonLocationsRepository.cs" />
+    <Compile Include="Abstraction\IPhoneNumbersRepository.cs" />
+    <Compile Include="Abstraction\IProductsRepository.cs" />
+    <Compile Include="Abstraction\IRepository.cs" />
+    <Compile Include="Abstraction\IRestrictedInfoRepository.cs" />
+    <Compile Include="Abstraction\IWarehousesRepository.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -241,6 +258,23 @@
     <Compile Include="Models\RestrictedInfo.cs" />
     <Compile Include="Models\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Realization\CountriesRepository.cs" />
+    <Compile Include="Realization\CustomerCompaniesRepository.cs" />
+    <Compile Include="Realization\CustomerEmployeesRepository.cs" />
+    <Compile Include="Realization\CustomersRepository.cs" />
+    <Compile Include="Realization\EmploymentJobsRepository.cs" />
+    <Compile Include="Realization\EmploymentsRepository.cs" />
+    <Compile Include="Realization\InventoriesRepository.cs" />
+    <Compile Include="Realization\LocationsRepository.cs" />
+    <Compile Include="Realization\OrderItemsRepository.cs" />
+    <Compile Include="Realization\OrdersRepository.cs" />
+    <Compile Include="Realization\PeopleRepository.cs" />
+    <Compile Include="Realization\PersonLocationsRepository.cs" />
+    <Compile Include="Realization\PhoneNumbersRepository.cs" />
+    <Compile Include="Realization\ProductsRepository.cs" />
+    <Compile Include="Realization\RestrictedInfoRepository.cs" />
+    <Compile Include="Realization\SQLiteRepository.cs" />
+    <Compile Include="Realization\WarehousesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

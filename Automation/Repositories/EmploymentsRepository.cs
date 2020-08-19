@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,12 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-
-                        temp.StartDate = obj.StartDate;
-                        temp.EndDate = obj.EndDate;
-                        temp.Salary = temp.Salary;
-                        temp.CommissionPercent = temp.CommissionPercent;
-                        temp.Employmentcol = obj.Employmentcol;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -81,7 +78,7 @@ namespace WebService.Realization
             return dataBase.Employments; 
         }
 
-        public Employment GetEmploymentsId(int id)
+        public Employment GetEmploymentId(int id)
         { 
             Employment obj = null; 
             foreach (Employment o in dataBase.Employments) 

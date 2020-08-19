@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class InventoriesRepository : IInventoriesRepository
     {
-        public ProductsRepository()
+        public InventoriesRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<Inventory> Inventories { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.Inventories.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(Inventory obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.Inventories.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, Inventory obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.Inventories.FirstOrDefault(_ => _.InventoryId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteInventory(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            Inventory obj = dataBase.Inventories.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.Inventories.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Inventory> GetInventories()
         { 
-            return dataBase.Products; 
+            return dataBase.Inventories; 
         }
 
-        public Product GetProductId(int id)
+        public Inventory GetInventoryId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            Inventory obj = null; 
+            foreach (Inventory o in dataBase.Inventories) 
             { 
-                if (o.ProductId == id) 
+                if (o.InventoryId == id) 
                 { 
                     obj = o; break; 
                 } 

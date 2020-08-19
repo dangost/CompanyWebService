@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,8 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.UnitPrice = obj.UnitPrice;
-                        temp.Quantity = obj.Quantity;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -77,7 +78,7 @@ namespace WebService.Realization
             return dataBase.OrderItems; 
         }
 
-        public OrderItem GetOrderItemsId(int id)
+        public OrderItem GetOrderItemId(int id)
         { 
             OrderItem obj = null; 
             foreach (OrderItem o in dataBase.OrderItems) 

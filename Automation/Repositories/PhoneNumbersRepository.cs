@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,9 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.Phonenumber = obj.Phonenumber;
-                        temp.CountryCode = obj.CountryCode;
-                        temp.PhoneType = obj.PhoneType;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -78,7 +78,7 @@ namespace WebService.Realization
             return dataBase.PhoneNumbers; 
         }
 
-        public PhoneNumber GetPhoneNumbersId(int id)
+        public PhoneNumber GetPhoneNumberId(int id)
         { 
             PhoneNumber obj = null; 
             foreach (PhoneNumber o in dataBase.PhoneNumbers) 

@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 

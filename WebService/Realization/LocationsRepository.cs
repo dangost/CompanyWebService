@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class LocationsRepository : ILocationsRepository
     {
-        public ProductsRepository()
+        public LocationsRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<Location> Locations { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.Locations.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(Location obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.Locations.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, Location obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.Locations.FirstOrDefault(_ => _.LocationId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteLocation(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            Location obj = dataBase.Locations.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.Locations.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Location> GetLocations()
         { 
-            return dataBase.Products; 
+            return dataBase.Locations; 
         }
 
-        public Product GetProductId(int id)
+        public Location GetLocationId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            Location obj = null; 
+            foreach (Location o in dataBase.Locations) 
             { 
-                if (o.ProductId == id) 
+                if (o.LocationId == id) 
                 { 
                     obj = o; break; 
                 } 

@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,16 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.CountryId = obj.CountryId;
-                        temp.AdressLine1 = obj.AdressLine1;
-                        temp.AdressLine2 = obj.AdressLine2;
-                        temp.City = obj.City;
-                        temp.State = obj.State;
-                        temp.District = obj.District;
-                        temp.PostalCode = obj.PostalCode;
-                        temp.Description = obj.Description;
-                        temp.LocationTypeCode = obj.LocationTypeCode;
-                        temp.ShippingNotes = obj.ShippingNotes;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -85,7 +78,7 @@ namespace WebService.Realization
             return dataBase.Locations; 
         }
 
-        public Location GetLocationsId(int id)
+        public Location GetLocationId(int id)
         { 
             Location obj = null; 
             foreach (Location o in dataBase.Locations) 

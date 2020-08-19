@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class OrderItemsRepository : IOrderItemsRepository
     {
-        public ProductsRepository()
+        public OrderItemsRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<OrderItem> OrderItems { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.OrderItems.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(OrderItem obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.OrderItems.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, OrderItem obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.OrderItems.FirstOrDefault(_ => _.OrderItemId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteOrderItem(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            OrderItem obj = dataBase.OrderItems.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.OrderItems.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<OrderItem> GetOrderItems()
         { 
-            return dataBase.Products; 
+            return dataBase.OrderItems; 
         }
 
-        public Product GetProductId(int id)
+        public OrderItem GetOrderItemId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            OrderItem obj = null; 
+            foreach (OrderItem o in dataBase.OrderItems) 
             { 
-                if (o.ProductId == id) 
+                if (o.OrderItemId == id) 
                 { 
                     obj = o; break; 
                 } 

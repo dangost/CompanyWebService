@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class CustomerCompaniesRepository : ICustomerCompaniesRepository
     {
-        public ProductsRepository()
+        public CustomerCompaniesRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<CustomerCompany> CustomerCompanies { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.CustomerCompanies.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(CustomerCompany obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.CustomerCompanies.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, CustomerCompany obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.CustomerCompanies.FirstOrDefault(_ => _.CompanyId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteCustomerCompany(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            CustomerCompany obj = dataBase.CustomerCompanies.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.CustomerCompanies.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<CustomerCompany> GetCustomerCompanies()
         { 
-            return dataBase.Products; 
+            return dataBase.CustomerCompanies; 
         }
 
-        public Product GetProductId(int id)
+        public CustomerCompany GetCustomerCompanyId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            CustomerCompany obj = null; 
+            foreach (CustomerCompany o in dataBase.CustomerCompanies) 
             { 
-                if (o.ProductId == id) 
+                if (o.CompanyId == id) 
                 { 
                     obj = o; break; 
                 } 

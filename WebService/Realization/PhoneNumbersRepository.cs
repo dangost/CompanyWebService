@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class PhoneNumbersRepository : IPhoneNumbersRepository
     {
-        public ProductsRepository()
+        public PhoneNumbersRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.PhoneNumbers.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(PhoneNumber obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.PhoneNumbers.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, PhoneNumber obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.PhoneNumbers.FirstOrDefault(_ => _.PhoneNumberId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeletePhoneNumber(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            PhoneNumber obj = dataBase.PhoneNumbers.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.PhoneNumbers.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<PhoneNumber> GetPhoneNumbers()
         { 
-            return dataBase.Products; 
+            return dataBase.PhoneNumbers; 
         }
 
-        public Product GetProductId(int id)
+        public PhoneNumber GetPhoneNumberId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            PhoneNumber obj = null; 
+            foreach (PhoneNumber o in dataBase.PhoneNumbers) 
             { 
-                if (o.ProductId == id) 
+                if (o.PhoneNumberId == id) 
                 { 
                     obj = o; break; 
                 } 

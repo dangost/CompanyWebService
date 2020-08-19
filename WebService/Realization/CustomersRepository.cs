@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class CustomersRepository : ICustomersRepository
     {
-        public ProductsRepository()
+        public CustomersRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<Customer> Customers { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.Customers.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(Customer obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.Customers.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, Customer obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.Customers.FirstOrDefault(_ => _.CustomerId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteCustomer(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            Customer obj = dataBase.Customers.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.Customers.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Customer> GetCustomers()
         { 
-            return dataBase.Products; 
+            return dataBase.Customers; 
         }
 
-        public Product GetProductId(int id)
+        public Customer GetCustomerId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            Customer obj = null; 
+            foreach (Customer o in dataBase.Customers) 
             { 
-                if (o.ProductId == id) 
+                if (o.CustomerId == id) 
                 { 
                     obj = o; break; 
                 } 

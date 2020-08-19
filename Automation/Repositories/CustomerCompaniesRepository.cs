@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,9 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.CompanyName = obj.CompanyName;
-                        temp.CreditLimitCurrency = obj.CreditLimitCurrency;
-                        temp.CompanyCreditLimit = obj.CompanyCreditLimit;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -78,7 +78,7 @@ namespace WebService.Realization
             return dataBase.CustomerCompanies; 
         }
 
-        public CustomerCompany GetCustomerCompaniesId(int id)
+        public CustomerCompany GetCustomerCompanyId(int id)
         { 
             CustomerCompany obj = null; 
             foreach (CustomerCompany o in dataBase.CustomerCompanies) 

@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,9 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.WarehouseId = obj.WarehouseId;
-                        temp.QuantityOnHand = obj.QuantityOnHand;
-                        temp.QuantityAvaliable = obj.QuantityAvaliable;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -78,7 +78,7 @@ namespace WebService.Realization
             return dataBase.Inventories; 
         }
 
-        public Inventory GetInventoriesId(int id)
+        public Inventory GetInventoryId(int id)
         { 
             Inventory obj = null; 
             foreach (Inventory o in dataBase.Inventories) 

@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,10 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.CountryName = obj.CountryName;
-                        temp.CountryCode = obj.CountryCode;
-                        temp.NatLangCode = obj.NatLangCode;
-                        temp.CurrencyCode = obj.CurrencyCode;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -79,7 +78,7 @@ namespace WebService.Realization
             return dataBase.Countries; 
         }
 
-        public Country GetCountriesId(int id)
+        public Country GetCountryId(int id)
         { 
             Country obj = null; 
             foreach (Country o in dataBase.Countries) 

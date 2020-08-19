@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,13 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.FirstName = obj.FirstName;
-                        temp.LastName = obj.LastName;
-                        temp.MiddleName = obj.MiddleName;
-                        temp.Nickname = obj.Nickname;
-                        temp.NatLangCode = obj.NatLangCode;
-                        temp.CultureCode = obj.CultureCode;
-                        temp.Gender = obj.Gender;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -82,7 +78,7 @@ namespace WebService.Realization
             return dataBase.People; 
         }
 
-        public Person GetPeopleId(int id)
+        public Person GetPersonId(int id)
         { 
             Person obj = null; 
             foreach (Person o in dataBase.People) 

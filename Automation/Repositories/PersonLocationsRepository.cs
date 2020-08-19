@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,9 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.SubAdress = obj.SubAdress;
-                        temp.LocationUsage = obj.LocationUsage;
-                        temp.Notes = obj.Notes;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -78,7 +78,7 @@ namespace WebService.Realization
             return dataBase.PersonLocations; 
         }
 
-        public PersonLocation GetPersonLocationsId(int id)
+        public PersonLocation GetPersonLocationId(int id)
         { 
             PersonLocation obj = null; 
             foreach (PersonLocation o in dataBase.PersonLocations) 

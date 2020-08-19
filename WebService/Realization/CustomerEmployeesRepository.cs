@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class CustomerEmployeesRepository : ICustomerEmployeesRepository
     {
-        public ProductsRepository()
+        public CustomerEmployeesRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<CustomerEmployee> CustomerEmployees { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.CustomerEmployees.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(CustomerEmployee obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.CustomerEmployees.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, CustomerEmployee obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.CustomerEmployees.FirstOrDefault(_ => _.CustomerEmployeeId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteCustomerEmployee(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            CustomerEmployee obj = dataBase.CustomerEmployees.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.CustomerEmployees.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<CustomerEmployee> GetCustomerEmployees()
         { 
-            return dataBase.Products; 
+            return dataBase.CustomerEmployees; 
         }
 
-        public Product GetProductId(int id)
+        public CustomerEmployee GetCustomerEmployeeId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            CustomerEmployee obj = null; 
+            foreach (CustomerEmployee o in dataBase.CustomerEmployees) 
             { 
-                if (o.ProductId == id) 
+                if (o.CustomerEmployeeId == id) 
                 { 
                     obj = o; break; 
                 } 

@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class PersonLocationsRepository : IPersonLocationsRepository
     {
-        public ProductsRepository()
+        public PersonLocationsRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<PersonLocation> PersonLocations { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.PersonLocations.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(PersonLocation obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.PersonLocations.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, PersonLocation obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.PersonLocations.FirstOrDefault(_ => _.LocationsLocationId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeletePersonLocation(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            PersonLocation obj = dataBase.PersonLocations.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.PersonLocations.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<PersonLocation> GetPersonLocations()
         { 
-            return dataBase.Products; 
+            return dataBase.PersonLocations; 
         }
 
-        public Product GetProductId(int id)
+        public PersonLocation GetPersonLocationId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            PersonLocation obj = null; 
+            foreach (PersonLocation o in dataBase.PersonLocations) 
             { 
-                if (o.ProductId == id) 
+                if (o.LocationsLocationId == id) 
                 { 
                     obj = o; break; 
                 } 

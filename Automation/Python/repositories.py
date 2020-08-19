@@ -1,4 +1,4 @@
-path = r"C:\Users\danil\Desktop\Automation\Repositories"
+path = r"D:\Projects\Regula\Web\CompanyWebService\Automation\Repositories"
 
 class_names = ["Country", "Customer", "CustomerCompany", "CustomerEmployee","Employment","EmploymentJobs","Inventory","Location","OrderItem", "Orders", "Person", "PersonLocation", "PhoneNumber", "Product", "RestrictedInfo", "Warehouse"]
 list_names = ["Countries", "Customers", "CustomerCompanies", "CustomerEmployees","Employments", "EmploymentJobs", "Inventories","Locations","OrderItems", "Orders", "People", "PersonLocations","PhoneNumbers", "Products", "RestrictedInfo", "Warehouses"]
@@ -38,7 +38,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            //Create DataBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -88,7 +88,7 @@ namespace WebService.Realization
             return dataBase.''' + list_names[i] + '''; 
         }
 
-        public '''+class_names[i]+''' Get''' + list_names[i] + '''Id(int id)
+        public '''+class_names[i]+''' Get''' + class_names[i] + '''Id(int id)
         { 
             '''+class_names[i]+''' obj = null; 
             foreach ('''+class_names[i]+''' o in dataBase.''' + list_names[i] + ''') 

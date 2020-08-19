@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,12 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.OrderDate = obj.OrderDate;
-                        temp.OrderCode = obj.OrderCode;
-                        temp.OrderStatus = obj.OrderStatus;
-                        temp.OrderTotal = obj.OrderTotal;
-                        temp.OrderCurrency = obj.OrderCurrency;
-                        temp.PromotionCode = obj.PromotionCode;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }

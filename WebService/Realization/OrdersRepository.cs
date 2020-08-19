@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class OrdersRepository : IOrdersRepository
     {
-        public ProductsRepository()
+        public OrdersRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<Orders> Orders { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.Orders.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(Orders obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.Orders.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, Orders obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.Orders.FirstOrDefault(_ => _.OrderId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteOrders(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            Orders obj = dataBase.Orders.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.Orders.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Orders> GetOrders()
         { 
-            return dataBase.Products; 
+            return dataBase.Orders; 
         }
 
-        public Product GetProductId(int id)
+        public Orders GetOrdersId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            Orders obj = null; 
+            foreach (Orders o in dataBase.Orders) 
             { 
-                if (o.ProductId == id) 
+                if (o.OrderId == id) 
                 { 
                     obj = o; break; 
                 } 

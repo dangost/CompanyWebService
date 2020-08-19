@@ -8,9 +8,9 @@ using WebService.Abstraction;
 
 namespace WebService.Realization
 {
-    public class ProductsRepository : IProductsRepository
+    public class RestrictedInfoRepository : IRestrictedInfoRepository
     {
-        public ProductsRepository()
+        public RestrictedInfoRepository()
         {
             Load();
         }
@@ -21,33 +21,33 @@ namespace WebService.Realization
             {
             }
 
-            public DbSet<Product> Products { get; set; }
+            public DbSet<RestrictedInfo> RestrictedInfo { get; set; }
         }
 
         ApplicationContext dataBase;
 
         public void Load()
         {
-            SQLiteRepository.CreateBase();
+            SQLiteRepository.Initialize();
 
             dataBase = new ApplicationContext();
 
-            dataBase.Products.Load();
+            dataBase.RestrictedInfo.Load();
 
             Update();
         }
 
-        public void Add(Product obj) 
+        public void Add(RestrictedInfo obj) 
         { 
-            dataBase.Products.Add(obj);
+            dataBase.RestrictedInfo.Add(obj);
             Update(); 
         }
 
-        public void Edit(int id, Product obj)
+        public void Edit(int id, RestrictedInfo obj)
         {
             using (var context = new ApplicationContext())
             {
-                var temp = context.Products.FirstOrDefault(_ => _.ProductId == id);
+                var temp = context.RestrictedInfo.FirstOrDefault(_ => _.PersonId == id);
                 try
                 {
                     if (temp != null)
@@ -63,27 +63,27 @@ namespace WebService.Realization
             }
         }
 
-        public void DeleteProduct(int id) 
+        public void DeleteRestrictedInfo(int id) 
         { 
-            Product obj = dataBase.Products.Find(id); 
+            RestrictedInfo obj = dataBase.RestrictedInfo.Find(id); 
             if (obj != null) 
             { 
-                dataBase.Products.Remove(obj);
+                dataBase.RestrictedInfo.Remove(obj);
                 Update();
             } 
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<RestrictedInfo> GetRestrictedInfo()
         { 
-            return dataBase.Products; 
+            return dataBase.RestrictedInfo; 
         }
 
-        public Product GetProductId(int id)
+        public RestrictedInfo GetRestrictedInfoId(int id)
         { 
-            Product obj = null; 
-            foreach (Product o in dataBase.Products) 
+            RestrictedInfo obj = null; 
+            foreach (RestrictedInfo o in dataBase.RestrictedInfo) 
             { 
-                if (o.ProductId == id) 
+                if (o.PersonId == id) 
                 { 
                     obj = o; break; 
                 } 

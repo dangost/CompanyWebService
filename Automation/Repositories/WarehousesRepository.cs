@@ -28,7 +28,7 @@ namespace WebService.Realization
 
         public void Load()
         {
-            SQLiteSupport.CreateBase();
+            SQLiteRepository.CreateBase();
 
             dataBase = new ApplicationContext();
 
@@ -52,7 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        temp.WarehouseName = obj.WarehouseName;
+                        //
+                        //  change properties
+                        //
 
                         context.SaveChanges();
                     }
@@ -63,7 +65,7 @@ namespace WebService.Realization
 
         public void DeleteWarehouse(int id) 
         { 
-            Warehouse obj = dataBase.Warehouses.Find(id); 
+            Warehouse obj = dataBase.Warehouse.Find(id); 
             if (obj != null) 
             { 
                 dataBase.Warehouses.Remove(obj);
@@ -71,12 +73,12 @@ namespace WebService.Realization
             } 
         }
 
-        public IEnumerable<Warehouse> GetWarehouses()
+        public IEnumerable<Warehouse> GetWarehouse()
         { 
             return dataBase.Warehouses; 
         }
 
-        public Warehouse GetWarehousesId(int id)
+        public Warehouse GetWarehouseId(int id)
         { 
             Warehouse obj = null; 
             foreach (Warehouse o in dataBase.Warehouses) 
