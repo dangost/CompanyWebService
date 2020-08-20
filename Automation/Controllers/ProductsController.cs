@@ -7,23 +7,23 @@ using WebService.DI;
 
 namespace WebService.Controllers
 {
-    public class CountriesController : ApiController
+    public class ProductsController : ApiController
     {
-        public ICountriesRepository db;
+        public IProductsRepository db;
 
-        public CountriesController()
+        public ProductsController()
         {
             db = SQLiteRegistration.GetRepository(this);
         }
 
-        // GET api/Countries
-        public IEnumerable<Country> Get() { return db.GetCountries(); }
+        // GET api/Products
+        public IEnumerable<Product> Get() { return db.GetProducts(); }
 
-        // GET api/Countries/{id}
-        public Country Get(int id) { return db.GetCountryId(id); }
+        // GET api/Products/{id}
+        public Product Get(int id) { return db.GetProductId(id); }
 
-        // POST api/Countries
-        public IHttpActionResult Post([FromBody]Country value)
+        // POST api/Products
+        public IHttpActionResult Post([FromBody]Product value)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // PUT api/Countries/{id}
-        public IHttpActionResult Put(int id, [FromBody]Country value)
+        // PUT api/Products/{id}
+        public IHttpActionResult Put(int id, [FromBody]Product value)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(Country), ex.Message);
+                ModelState.AddModelError(nameof(Product), ex.Message);
 
                 return BadRequest(ModelState);
             }
@@ -56,7 +56,7 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // DELETE api/Countries/{id}
-        public void Delete(int id) { db.DeleteCountry(id); }
+        // DELETE api/Products/{id}
+        public void Delete(int id) { db.DeleteProduct(id); }
     }
 }

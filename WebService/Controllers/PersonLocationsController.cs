@@ -1,13 +1,20 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using WebService.Models;
+using WebService.Abstraction;
 using System;
+using WebService.DI;
 
 namespace WebService.Controllers
 {
     public class PersonLocationsController : ApiController
     {
-        IRepository db = RepositoryController.GetRepository();
+        public IPersonLocationsRepository db;
+
+        public PersonLocationsController()
+        {
+            db = SQLiteRegistration.GetRepository(this);
+        }
 
         // GET api/PersonLocations
         public IEnumerable<PersonLocation> Get() { return db.GetPersonLocations(); }

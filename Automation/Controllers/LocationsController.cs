@@ -7,23 +7,23 @@ using WebService.DI;
 
 namespace WebService.Controllers
 {
-    public class CountriesController : ApiController
+    public class LocationsController : ApiController
     {
-        public ICountriesRepository db;
+        public ILocationsRepository db;
 
-        public CountriesController()
+        public LocationsController()
         {
             db = SQLiteRegistration.GetRepository(this);
         }
 
-        // GET api/Countries
-        public IEnumerable<Country> Get() { return db.GetCountries(); }
+        // GET api/Locations
+        public IEnumerable<Location> Get() { return db.GetLocations(); }
 
-        // GET api/Countries/{id}
-        public Country Get(int id) { return db.GetCountryId(id); }
+        // GET api/Locations/{id}
+        public Location Get(int id) { return db.GetLocationId(id); }
 
-        // POST api/Countries
-        public IHttpActionResult Post([FromBody]Country value)
+        // POST api/Locations
+        public IHttpActionResult Post([FromBody]Location value)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // PUT api/Countries/{id}
-        public IHttpActionResult Put(int id, [FromBody]Country value)
+        // PUT api/Locations/{id}
+        public IHttpActionResult Put(int id, [FromBody]Location value)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(Country), ex.Message);
+                ModelState.AddModelError(nameof(Location), ex.Message);
 
                 return BadRequest(ModelState);
             }
@@ -56,7 +56,7 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // DELETE api/Countries/{id}
-        public void Delete(int id) { db.DeleteCountry(id); }
+        // DELETE api/Locations/{id}
+        public void Delete(int id) { db.DeleteLocation(id); }
     }
 }

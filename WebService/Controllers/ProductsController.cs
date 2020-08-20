@@ -1,13 +1,20 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using WebService.Models;
+using WebService.Abstraction;
 using System;
+using WebService.DI;
 
 namespace WebService.Controllers
 {
     public class ProductsController : ApiController
     {
-        IRepository db = RepositoryController.GetRepository();
+        public IProductsRepository db;
+
+        public ProductsController()
+        {
+            db = SQLiteRegistration.GetRepository(this);
+        }
 
         // GET api/Products
         public IEnumerable<Product> Get() { return db.GetProducts(); }

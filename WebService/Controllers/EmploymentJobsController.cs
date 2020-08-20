@@ -1,13 +1,20 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using WebService.Models;
+using WebService.Abstraction;
 using System;
+using WebService.DI;
 
 namespace WebService.Controllers
 {
     public class EmploymentJobsController : ApiController
     {
-        IRepository db = RepositoryController.GetRepository();
+        public IEmploymentJobsRepository db;
+
+        public EmploymentJobsController()
+        {
+            db = SQLiteRegistration.GetRepository(this);
+        }
 
         // GET api/EmploymentJobs
         public IEnumerable<EmploymentJobs> Get() { return db.GetEmploymentJobs(); }

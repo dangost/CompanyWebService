@@ -7,23 +7,23 @@ using WebService.DI;
 
 namespace WebService.Controllers
 {
-    public class CountriesController : ApiController
+    public class OrderItemsController : ApiController
     {
-        public ICountriesRepository db;
+        public IOrderItemsRepository db;
 
-        public CountriesController()
+        public OrderItemsController()
         {
             db = SQLiteRegistration.GetRepository(this);
         }
 
-        // GET api/Countries
-        public IEnumerable<Country> Get() { return db.GetCountries(); }
+        // GET api/OrderItems
+        public IEnumerable<OrderItem> Get() { return db.GetOrderItems(); }
 
-        // GET api/Countries/{id}
-        public Country Get(int id) { return db.GetCountryId(id); }
+        // GET api/OrderItems/{id}
+        public OrderItem Get(int id) { return db.GetOrderItemId(id); }
 
-        // POST api/Countries
-        public IHttpActionResult Post([FromBody]Country value)
+        // POST api/OrderItems
+        public IHttpActionResult Post([FromBody]OrderItem value)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // PUT api/Countries/{id}
-        public IHttpActionResult Put(int id, [FromBody]Country value)
+        // PUT api/OrderItems/{id}
+        public IHttpActionResult Put(int id, [FromBody]OrderItem value)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(Country), ex.Message);
+                ModelState.AddModelError(nameof(OrderItem), ex.Message);
 
                 return BadRequest(ModelState);
             }
@@ -56,7 +56,7 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // DELETE api/Countries/{id}
-        public void Delete(int id) { db.DeleteCountry(id); }
+        // DELETE api/OrderItems/{id}
+        public void Delete(int id) { db.DeleteOrderItem(id); }
     }
 }

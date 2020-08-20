@@ -7,23 +7,23 @@ using WebService.DI;
 
 namespace WebService.Controllers
 {
-    public class CountriesController : ApiController
+    public class EmploymentJobsController : ApiController
     {
-        public ICountriesRepository db;
+        public IEmploymentJobsRepository db;
 
-        public CountriesController()
+        public EmploymentJobsController()
         {
             db = SQLiteRegistration.GetRepository(this);
         }
 
-        // GET api/Countries
-        public IEnumerable<Country> Get() { return db.GetCountries(); }
+        // GET api/EmploymentJobs
+        public IEnumerable<EmploymentJobs> Get() { return db.GetEmploymentJobs(); }
 
-        // GET api/Countries/{id}
-        public Country Get(int id) { return db.GetCountryId(id); }
+        // GET api/EmploymentJobs/{id}
+        public EmploymentJobs Get(int id) { return db.GetEmploymentJobsId(id); }
 
-        // POST api/Countries
-        public IHttpActionResult Post([FromBody]Country value)
+        // POST api/EmploymentJobs
+        public IHttpActionResult Post([FromBody]EmploymentJobs value)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // PUT api/Countries/{id}
-        public IHttpActionResult Put(int id, [FromBody]Country value)
+        // PUT api/EmploymentJobs/{id}
+        public IHttpActionResult Put(int id, [FromBody]EmploymentJobs value)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(Country), ex.Message);
+                ModelState.AddModelError(nameof(EmploymentJobs), ex.Message);
 
                 return BadRequest(ModelState);
             }
@@ -56,7 +56,7 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // DELETE api/Countries/{id}
-        public void Delete(int id) { db.DeleteCountry(id); }
+        // DELETE api/EmploymentJobs/{id}
+        public void Delete(int id) { db.DeleteEmploymentJobs(id); }
     }
 }

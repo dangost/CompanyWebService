@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using WebService.Abstraction;
+﻿using System.Web.Mvc;
 namespace WebService.Controllers
 {
     public class HomeController : Controller
     {
-        ICountriesRepository db;
-        public HomeController(ICountriesRepository a)
+        public HomeController()
         {
-            db = a;
         }
         public ActionResult Index()
         {

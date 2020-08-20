@@ -7,23 +7,23 @@ using WebService.DI;
 
 namespace WebService.Controllers
 {
-    public class CountriesController : ApiController
+    public class EmploymentsController : ApiController
     {
-        public ICountriesRepository db;
+        public IEmploymentsRepository db;
 
-        public CountriesController()
+        public EmploymentsController()
         {
             db = SQLiteRegistration.GetRepository(this);
         }
 
-        // GET api/Countries
-        public IEnumerable<Country> Get() { return db.GetCountries(); }
+        // GET api/Employments
+        public IEnumerable<Employment> Get() { return db.GetEmployments(); }
 
-        // GET api/Countries/{id}
-        public Country Get(int id) { return db.GetCountryId(id); }
+        // GET api/Employments/{id}
+        public Employment Get(int id) { return db.GetEmploymentId(id); }
 
-        // POST api/Countries
-        public IHttpActionResult Post([FromBody]Country value)
+        // POST api/Employments
+        public IHttpActionResult Post([FromBody]Employment value)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // PUT api/Countries/{id}
-        public IHttpActionResult Put(int id, [FromBody]Country value)
+        // PUT api/Employments/{id}
+        public IHttpActionResult Put(int id, [FromBody]Employment value)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(Country), ex.Message);
+                ModelState.AddModelError(nameof(Employment), ex.Message);
 
                 return BadRequest(ModelState);
             }
@@ -56,7 +56,7 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // DELETE api/Countries/{id}
-        public void Delete(int id) { db.DeleteCountry(id); }
+        // DELETE api/Employments/{id}
+        public void Delete(int id) { db.DeleteEmployment(id); }
     }
 }

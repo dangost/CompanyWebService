@@ -31,7 +31,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(Customer), ex.Message);
+                ModelState.AddModelError(nameof(Country), ex.Message);
 
                 return BadRequest(ModelState);
             }

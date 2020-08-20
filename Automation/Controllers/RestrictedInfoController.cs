@@ -20,7 +20,7 @@ namespace WebService.Controllers
         public IEnumerable<RestrictedInfo> Get() { return db.GetRestrictedInfo(); }
 
         // GET api/RestrictedInfo/{id}
-        //public RestrictedInfo Get(int id) { return db.GetRestrictedInfoId(id); }
+        public RestrictedInfo Get(int id) { return db.GetRestrictedInfoId(id); }
 
         // POST api/RestrictedInfo
         public IHttpActionResult Post([FromBody]RestrictedInfo value)
@@ -31,7 +31,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(RestrictedInfo), ex.Message);
+                ModelState.AddModelError(nameof(Country), ex.Message);
 
                 return BadRequest(ModelState);
             }

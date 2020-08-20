@@ -23,14 +23,15 @@ namespace WebService.Controllers
         public CustomerCompany Get(int id) { return db.GetCustomerCompanyId(id); }
 
         // POST api/CustomerCompanies
-        public IHttpActionResult Post([FromBody]CustomerCompany value) {
+        public IHttpActionResult Post([FromBody]CustomerCompany value)
+        {
             try
             {
                 db.Add(value);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(CustomerCompany), ex.Message);
+                ModelState.AddModelError(nameof(Country), ex.Message);
 
                 return BadRequest(ModelState);
             }

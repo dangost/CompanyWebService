@@ -8,13 +8,10 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Ninject;
-using Ninject.Modules;
-using Ninject.Web.Mvc;
-using Unity;
-using WebService.Util;
 using WebService.Controllers;
 using System.Reflection;
+using WebService.Abstraction;
+using WebService.Realization;
 
 namespace WebService
 {

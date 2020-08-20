@@ -31,7 +31,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(CustomerEmployee), ex.Message);
+                ModelState.AddModelError(nameof(Country), ex.Message);
 
                 return BadRequest(ModelState);
             }
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id, value);
+                db.Edit(id,value);
             }
             catch (Exception ex)
             {

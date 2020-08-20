@@ -7,23 +7,23 @@ using WebService.DI;
 
 namespace WebService.Controllers
 {
-    public class CountriesController : ApiController
+    public class PersonLocationsController : ApiController
     {
-        public ICountriesRepository db;
+        public IPersonLocationsRepository db;
 
-        public CountriesController()
+        public PersonLocationsController()
         {
             db = SQLiteRegistration.GetRepository(this);
         }
 
-        // GET api/Countries
-        public IEnumerable<Country> Get() { return db.GetCountries(); }
+        // GET api/PersonLocations
+        public IEnumerable<PersonLocation> Get() { return db.GetPersonLocations(); }
 
-        // GET api/Countries/{id}
-        public Country Get(int id) { return db.GetCountryId(id); }
+        // GET api/PersonLocations/{id}
+        public PersonLocation Get(int id) { return db.GetPersonLocationId(id); }
 
-        // POST api/Countries
-        public IHttpActionResult Post([FromBody]Country value)
+        // POST api/PersonLocations
+        public IHttpActionResult Post([FromBody]PersonLocation value)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // PUT api/Countries/{id}
-        public IHttpActionResult Put(int id, [FromBody]Country value)
+        // PUT api/PersonLocations/{id}
+        public IHttpActionResult Put(int id, [FromBody]PersonLocation value)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace WebService.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(Country), ex.Message);
+                ModelState.AddModelError(nameof(PersonLocation), ex.Message);
 
                 return BadRequest(ModelState);
             }
@@ -56,7 +56,7 @@ namespace WebService.Controllers
             return Ok();
         }
 
-        // DELETE api/Countries/{id}
-        public void Delete(int id) { db.DeleteCountry(id); }
+        // DELETE api/PersonLocations/{id}
+        public void Delete(int id) { db.DeletePersonLocation(id); }
     }
 }

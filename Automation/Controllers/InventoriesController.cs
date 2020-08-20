@@ -23,14 +23,15 @@ namespace WebService.Controllers
         public Inventory Get(int id) { return db.GetInventoryId(id); }
 
         // POST api/Inventories
-        public IHttpActionResult Post([FromBody]Inventory value) {
+        public IHttpActionResult Post([FromBody]Inventory value)
+        {
             try
             {
                 db.Add(value);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(nameof(Inventory), ex.Message);
+                ModelState.AddModelError(nameof(Country), ex.Message);
 
                 return BadRequest(ModelState);
             }
