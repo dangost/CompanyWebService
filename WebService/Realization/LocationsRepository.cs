@@ -52,9 +52,17 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.CountryId = obj.CountryId;
+                        temp.AdressLine1 = obj.AdressLine1;
+                        temp.AdressLine2 = obj.AdressLine2;
+                        temp.City = obj.City;
+                        temp.State = obj.State;
+                        temp.District = obj.District;
+                        temp.PostalCode = obj.PostalCode;
+                        temp.Description = obj.Description;
+                        temp.LocationTypeCode = obj.LocationTypeCode;
+                        temp.ShippingNotes = obj.ShippingNotes;
+
 
                         context.SaveChanges();
                     }

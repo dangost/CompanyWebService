@@ -52,9 +52,8 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.UnitPrice = obj.UnitPrice;
+                        temp.Quantity = obj.Quantity;
 
                         context.SaveChanges();
                     }

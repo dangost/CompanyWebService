@@ -52,9 +52,13 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.FirstName = obj.FirstName;
+                        temp.LastName = obj.LastName;
+                        temp.MiddleName = obj.MiddleName;
+                        temp.Nickname = obj.Nickname;
+                        temp.NatLangCode = obj.NatLangCode;
+                        temp.CultureCode = obj.CultureCode;
+                        temp.Gender = obj.Gender;
 
                         context.SaveChanges();
                     }

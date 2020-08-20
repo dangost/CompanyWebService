@@ -52,9 +52,10 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.CountryName = obj.CountryName;
+                        temp.CountryCode = obj.CountryCode;
+                        temp.NatLangCode = obj.NatLangCode;
+                        temp.CurrencyCode = obj.CurrencyCode;
 
                         context.SaveChanges();
                     }

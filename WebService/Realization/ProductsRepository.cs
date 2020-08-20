@@ -52,9 +52,17 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.ProductName = obj.ProductName;
+                        temp.Description = obj.Description;
+                        temp.Category = obj.Category;
+                        temp.WeightClass = obj.WeightClass;
+                        temp.WarrantlyPeriod = obj.WarrantlyPeriod;
+                        temp.SupplierId = obj.SupplierId;
+                        temp.Status = obj.Status;
+                        temp.ListPrice = obj.ListPrice;
+                        temp.MinimumPrice = obj.MinimumPrice;
+                        temp.PriceCurrency = obj.PriceCurrency;
+                        temp.CatalogURL = obj.CatalogURL;
 
                         context.SaveChanges();
                     }

@@ -52,9 +52,10 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.CompanyName = obj.CompanyName;
+                        temp.CreditLimitCurrency = obj.CreditLimitCurrency;
+                        temp.CompanyCreditLimit = obj.CompanyCreditLimit;
+
 
                         context.SaveChanges();
                     }

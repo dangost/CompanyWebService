@@ -52,9 +52,11 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.StartDate = obj.StartDate;
+                        temp.EndDate = obj.EndDate;
+                        temp.Salary = temp.Salary;
+                        temp.CommissionPercent = temp.CommissionPercent;
+                        temp.Employmentcol = obj.Employmentcol;
 
                         context.SaveChanges();
                     }

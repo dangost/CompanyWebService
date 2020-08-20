@@ -52,9 +52,7 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.WarehouseName = obj.WarehouseName;
 
                         context.SaveChanges();
                     }

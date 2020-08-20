@@ -52,9 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.WarehouseId = obj.WarehouseId;
+                        temp.QuantityOnHand = obj.QuantityOnHand;
+                        temp.QuantityAvaliable = obj.QuantityAvaliable;
 
                         context.SaveChanges();
                     }

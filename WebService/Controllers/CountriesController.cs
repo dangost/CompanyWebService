@@ -1,13 +1,20 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using WebService.Models;
+using WebService.Abstraction;
 using System;
+using Ninject;
 
 namespace WebService.Controllers
 {
     public class CountriesController : ApiController
     {
-        public IRepository db = RepositoryController.GetRepository();
+        public ICountriesRepository db;// = RepositoryController.GetRepository();
+
+        public CountriesController(ICountriesRepository a)
+        {
+            db = a;
+        }
 
         // GET api/Countries
         public IEnumerable<Country> Get() { return db.GetCountries(); }

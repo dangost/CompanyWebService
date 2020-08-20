@@ -52,9 +52,10 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.JobTitle = obj.JobTitle;
+                        temp.MinSalary = obj.MinSalary;
+                        temp.MaxSalary = obj.MaxSalary;
+
 
                         context.SaveChanges();
                     }

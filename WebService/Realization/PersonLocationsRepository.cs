@@ -52,9 +52,9 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.SubAdress = obj.SubAdress;
+                        temp.LocationUsage = obj.LocationUsage;
+                        temp.Notes = obj.Notes;
 
                         context.SaveChanges();
                     }

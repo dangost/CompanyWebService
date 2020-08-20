@@ -52,9 +52,8 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.AccountMgrId = obj.AccountMgrId;
+                        temp.IncomeLevel = obj.IncomeLevel;
 
                         context.SaveChanges();
                     }

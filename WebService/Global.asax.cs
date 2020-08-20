@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
+using Unity;
+using WebService.Util;
 using WebService.Controllers;
+using System.Reflection;
 
 namespace WebService
 {
@@ -14,8 +22,6 @@ namespace WebService
     {
         protected void Application_Start()
         {
-            new SQLiteServiceBase();
-
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -23,4 +29,5 @@ namespace WebService
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
+
 }

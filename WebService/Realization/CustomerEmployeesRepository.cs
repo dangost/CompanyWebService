@@ -52,9 +52,12 @@ namespace WebService.Realization
                 {
                     if (temp != null)
                     {
-                        //
-                        //  change properties
-                        //
+                        temp.BadgeNumber = obj.BadgeNumber;
+                        temp.JobTitle = obj.JobTitle;
+                        temp.Department = obj.Department;
+                        temp.CreditLimit = obj.CreditLimit;
+                        temp.CreditLimitCurrency = obj.CreditLimitCurrency;
+
 
                         context.SaveChanges();
                     }
