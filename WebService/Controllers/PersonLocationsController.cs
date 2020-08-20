@@ -11,9 +11,9 @@ namespace WebService.Controllers
     {
         public IPersonLocationsRepository db;
 
-        public PersonLocationsController()
+        public PersonLocationsController(IPersonLocationsRepository _db)
         {
-            db = SQLiteRegistration.GetRepository(this);
+            db = _db;
         }
 
         // GET api/PersonLocations

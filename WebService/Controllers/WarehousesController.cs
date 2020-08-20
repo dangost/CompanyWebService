@@ -11,9 +11,9 @@ namespace WebService.Controllers
     {
         public IWarehousesRepository db;
 
-        public WarehousesController()
+        public WarehousesController(IWarehousesRepository _db)
         {
-            db = SQLiteRegistration.GetRepository(this);
+            db = _db;
         }
         // GET api/Warehouses
         public IEnumerable<Warehouse> Get() { return db.GetWarehouses(); }

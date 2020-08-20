@@ -11,9 +11,9 @@ namespace WebService.Controllers
     {
         public IInventoriesRepository db;
 
-        public InventoriesController()
+        public InventoriesController(IInventoriesRepository _db)
         {
-            db = SQLiteRegistration.GetRepository(this);
+            db = _db;
         }
 
         // GET api/Inventories

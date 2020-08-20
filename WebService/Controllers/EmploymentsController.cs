@@ -11,9 +11,9 @@ namespace WebService.Controllers
     {
         public IEmploymentsRepository db;
 
-        public EmploymentsController()
+        public EmploymentsController(IEmploymentsRepository _db)
         {
-            db = SQLiteRegistration.GetRepository(this);
+            db = _db;
         }
 
         // GET api/Employments

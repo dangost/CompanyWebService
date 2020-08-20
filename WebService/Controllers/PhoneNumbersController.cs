@@ -11,9 +11,9 @@ namespace WebService.Controllers
     {
         public IPhoneNumbersRepository db;
 
-        public PhoneNumbersController()
+        public PhoneNumbersController(IPhoneNumbersRepository _db)
         {
-            db = SQLiteRegistration.GetRepository(this);
+            db = _db;
         }
 
         // GET api/PhoneNumbers

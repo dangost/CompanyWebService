@@ -11,9 +11,9 @@ namespace WebService.Controllers
     {
         public IRestrictedInfoRepository db;
 
-        public RestrictedInfoController()
+        public RestrictedInfoController(IRestrictedInfoRepository _db)
         {
-            db = SQLiteRegistration.GetRepository(this);
+            db = _db;
         }
 
         // GET api/RestrictedInfo

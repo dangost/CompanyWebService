@@ -11,9 +11,9 @@ namespace WebService.Controllers
     {
         public ICountriesRepository db;
 
-        public CountriesController()
+        public CountriesController(ICountriesRepository _db)
         {
-            db = SQLiteRegistration.GetRepository(this);
+            db = _db;
         }
 
         // GET api/Countries

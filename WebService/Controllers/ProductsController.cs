@@ -11,9 +11,9 @@ namespace WebService.Controllers
     {
         public IProductsRepository db;
 
-        public ProductsController()
+        public ProductsController(IProductsRepository _db)
         {
-            db = SQLiteRegistration.GetRepository(this);
+            db = _db;
         }
 
         // GET api/Products

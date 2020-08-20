@@ -8,10 +8,9 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using WebService.Controllers;
-using System.Reflection;
-using WebService.Abstraction;
-using WebService.Realization;
+using Ninject.Modules;
+using Ninject;
+using WebService.DI;
 
 namespace WebService
 {
@@ -24,6 +23,12 @@ namespace WebService
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+            var ninjectResolver = new NinjectDependencyResolver(kernel);
+
+            GlobalConfiguration.Configuration.DependencyResolver = ninjectResolver;
         }
     }
 
