@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class CountriesController : ApiController
     {
-        public ICountriesRepository db;
+        private readonly ICountriesRepository _db;
 
-        public CountriesController(ICountriesRepository _db)
+        public CountriesController(ICountriesRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/Countries
-        public IEnumerable<Country> Get() { return db.GetCountries(); }
+        public IEnumerable<Country> Get() { return _db.GetCountries(); }
 
         // GET api/Countries/{id}
-        public Country Get(int id) { return db.GetCountryId(id); }
+        public Country Get(int id) { return _db.GetCountryId(id); }
 
         // POST api/Countries
         public IHttpActionResult Post([FromBody]Country value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/Countries/{id}
-        public void Delete(int id) { db.DeleteCountry(id); }
+        public void Delete(int id) { _db.DeleteCountry(id); }
     }
 }

@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class ProductsController : ApiController
     {
-        public IProductsRepository db;
+        private readonly IProductsRepository _db;
 
-        public ProductsController(IProductsRepository _db)
+        public ProductsController(IProductsRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/Products
-        public IEnumerable<Product> Get() { return db.GetProducts(); }
+        public IEnumerable<Product> Get() { return _db.GetProducts(); }
 
         // GET api/Products/{id}
-        public Product Get(int id) { return db.GetProductId(id); }
+        public Product Get(int id) { return _db.GetProductId(id); }
 
         // POST api/Products
         public IHttpActionResult Post([FromBody]Product value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/Products/{id}
-        public void Delete(int id) { db.DeleteProduct(id); }
+        public void Delete(int id) { _db.DeleteProduct(id); }
     }
 }

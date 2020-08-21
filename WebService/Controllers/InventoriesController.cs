@@ -9,24 +9,24 @@ namespace WebService.Controllers
 {
     public class InventoriesController : ApiController
     {
-        public IInventoriesRepository db;
+        private readonly IInventoriesRepository _db;
 
-        public InventoriesController(IInventoriesRepository _db)
+        public InventoriesController(IInventoriesRepository db)
         {
-            db = _db;
+            _db = db;
         }
 
         // GET api/Inventories
-        public IEnumerable<Inventory> Get() { return db.GetInventories(); }
+        public IEnumerable<Inventory> Get() { return _db.GetInventories(); }
 
         // GET api/Inventories/{id}
-        public Inventory Get(int id) { return db.GetInventoryId(id); }
+        public Inventory Get(int id) { return _db.GetInventoryId(id); }
 
         // POST api/Inventories
         public IHttpActionResult Post([FromBody]Inventory value) {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -56,6 +56,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/Inventories/{id}
-        public void Delete(int id) { db.DeleteInventory(id); }
+        public void Delete(int id) { _db.DeleteInventory(id); }
     }
 }

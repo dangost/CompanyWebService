@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class LocationsController : ApiController
     {
-        public ILocationsRepository db;
+        private readonly ILocationsRepository _db;
 
-        public LocationsController(ILocationsRepository _db)
+        public LocationsController(ILocationsRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/Locations
-        public IEnumerable<Location> Get() { return db.GetLocations(); }
+        public IEnumerable<Location> Get() { return _db.GetLocations(); }
 
         // GET api/Locations/{id}
-        public Location Get(int id) { return db.GetLocationId(id); }
+        public Location Get(int id) { return _db.GetLocationId(id); }
 
         // POST api/Locations
         public IHttpActionResult Post([FromBody]Location value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/Locations/{id}
-        public void Delete(int id) { db.DeleteLocation(id); }
+        public void Delete(int id) { _db.DeleteLocation(id); }
     }
 }

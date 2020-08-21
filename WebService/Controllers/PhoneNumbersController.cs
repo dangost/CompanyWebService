@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class PhoneNumbersController : ApiController
     {
-        public IPhoneNumbersRepository db;
+        private readonly IPhoneNumbersRepository _db;
 
-        public PhoneNumbersController(IPhoneNumbersRepository _db)
+        public PhoneNumbersController(IPhoneNumbersRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/PhoneNumbers
-        public IEnumerable<PhoneNumber> Get() { return db.GetPhoneNumbers(); }
+        public IEnumerable<PhoneNumber> Get() { return _db.GetPhoneNumbers(); }
 
         // GET api/PhoneNumbers/{id}
-        public PhoneNumber Get(int id) { return db.GetPhoneNumberId(id); }
+        public PhoneNumber Get(int id) { return _db.GetPhoneNumberId(id); }
 
         // POST api/PhoneNumbers
         public IHttpActionResult Post([FromBody]PhoneNumber value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/PhoneNumbers/{id}
-        public void Delete(int id) { db.DeletePhoneNumber(id); }
+        public void Delete(int id) { _db.DeletePhoneNumber(id); }
     }
 }

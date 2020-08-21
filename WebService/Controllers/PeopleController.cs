@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class PeopleController : ApiController
     {
-        public IPeopleRepository db;
+        private readonly IPeopleRepository _db;
 
-        public PeopleController(IPeopleRepository _db)
+        public PeopleController(IPeopleRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/People
-        public IEnumerable<Person> Get() { return db.GetPeople(); }
+        public IEnumerable<Person> Get() { return _db.GetPeople(); }
 
         // GET api/People/{id}
-        public Person Get(int id) { return db.GetPersonId(id); }
+        public Person Get(int id) { return _db.GetPersonId(id); }
 
         // POST api/People
         public IHttpActionResult Post([FromBody]Person value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/People/{id}
-        public void Delete(int id) { db.DeletePerson(id); }
+        public void Delete(int id) { _db.DeletePerson(id); }
     }
 }

@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class OrdersController : ApiController
     {
-        public IOrdersRepository db;
+        private readonly IOrdersRepository _db;
 
-        public OrdersController(IOrdersRepository _db)
+        public OrdersController(IOrdersRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/Orders
-        public IEnumerable<Orders> Get() { return db.GetOrders(); }
+        public IEnumerable<Orders> Get() { return _db.GetOrders(); }
 
         // GET api/Orders/{id}
-        public Orders Get(int id) { return db.GetOrdersId(id); }
+        public Orders Get(int id) { return _db.GetOrdersId(id); }
 
         // POST api/Orders
         public IHttpActionResult Post([FromBody]Orders value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/Orders/{id}
-        public void Delete(int id) { db.DeleteOrders(id); }
+        public void Delete(int id) { _db.DeleteOrders(id); }
     }
 }

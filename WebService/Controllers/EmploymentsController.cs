@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class EmploymentsController : ApiController
     {
-        public IEmploymentsRepository db;
+        private readonly IEmploymentsRepository _db;
 
-        public EmploymentsController(IEmploymentsRepository _db)
+        public EmploymentsController(IEmploymentsRepository db)
         {
-            db = _db;
+            this._db = _db;
         }
 
         // GET api/Employments
-        public IEnumerable<Employment> Get() { return db.GetEmployments(); }
+        public IEnumerable<Employment> Get() { return _db.GetEmployments(); }
 
         // GET api/Employments/{id}
-        public Employment Get(int id) { return db.GetEmploymentId(id); }
+        public Employment Get(int id) { return _db.GetEmploymentId(id); }
 
         // POST api/Employments
         public IHttpActionResult Post([FromBody]Employment value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/Employments/{id}
-        public void Delete(int id) { db.DeleteEmployment(id); }
+        public void Delete(int id) { _db.DeleteEmployment(id); }
     }
 }

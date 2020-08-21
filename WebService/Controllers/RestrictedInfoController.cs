@@ -9,15 +9,15 @@ namespace WebService.Controllers
 {
     public class RestrictedInfoController : ApiController
     {
-        public IRestrictedInfoRepository db;
+        private readonly IRestrictedInfoRepository _db;
 
-        public RestrictedInfoController(IRestrictedInfoRepository _db)
+        public RestrictedInfoController(IRestrictedInfoRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/RestrictedInfo
-        public IEnumerable<RestrictedInfo> Get() { return db.GetRestrictedInfo(); }
+        public IEnumerable<RestrictedInfo> Get() { return _db.GetRestrictedInfo(); }
 
         // GET api/RestrictedInfo/{id}
         //public RestrictedInfo Get(int id) { return db.GetRestrictedInfoId(id); }
@@ -27,7 +27,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/RestrictedInfo/{id}
-        public void Delete(int id) { db.DeleteRestrictedInfo(id); }
+        public void Delete(int id) { _db.DeleteRestrictedInfo(id); }
     }
 }

@@ -9,24 +9,24 @@ namespace WebService.Controllers
 {
     public class WarehousesController : ApiController
     {
-        public IWarehousesRepository db;
+        private readonly IWarehousesRepository _db;
 
-        public WarehousesController(IWarehousesRepository _db)
+        public WarehousesController(IWarehousesRepository db)
         {
-            db = _db;
+            this._db = db;
         }
         // GET api/Warehouses
-        public IEnumerable<Warehouse> Get() { return db.GetWarehouses(); }
+        public IEnumerable<Warehouse> Get() { return _db.GetWarehouses(); }
 
         // GET api/Warehouses/{id}
-        public Warehouse Get(int id) { return db.GetWarehouseId(id); }
+        public Warehouse Get(int id) { return _db.GetWarehouseId(id); }
 
         // POST api/Warehouses
         public IHttpActionResult Post([FromBody]Warehouse value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -56,6 +56,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/Warehouses/{id}
-        public void Delete(int id) { db.DeleteWarehouse(id); }
+        public void Delete(int id) { _db.DeleteWarehouse(id); }
     }
 }

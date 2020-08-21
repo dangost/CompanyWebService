@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class CustomersController : ApiController
     {
-        public ICustomersRepository db;
+        private readonly ICustomersRepository _db;
 
-        public CustomersController(ICustomersRepository _db)
+        public CustomersController(ICustomersRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/Customers
-        public IEnumerable<Customer> Get() { return db.GetCustomers(); }
+        public IEnumerable<Customer> Get() { return _db.GetCustomers(); }
 
         // GET api/Customers/{id}
-        public Customer Get(int id) { return db.GetCustomerId(id); }
+        public Customer Get(int id) { return _db.GetCustomerId(id); }
 
         // POST api/Customers
         public IHttpActionResult Post([FromBody]Customer value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id,value);
+                _db.Edit(id,value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/Customers/{id}
-        public void Delete(int id) { db.DeleteCustomer(id); }
+        public void Delete(int id) { _db.DeleteCustomer(id); }
     }
 }

@@ -9,25 +9,25 @@ namespace WebService.Controllers
 {
     public class CustomerEmployeesController : ApiController
     {
-        public ICustomerEmployeesRepository db;
+        private readonly ICustomerEmployeesRepository _db;
 
-        public CustomerEmployeesController(ICustomerEmployeesRepository _db)
+        public CustomerEmployeesController(ICustomerEmployeesRepository db)
         {
-            db = _db;
+            this._db = db;
         }
 
         // GET api/CustomerEmployees
-        public IEnumerable<CustomerEmployee> Get() { return db.GetCustomerEmployees(); }
+        public IEnumerable<CustomerEmployee> Get() { return _db.GetCustomerEmployees(); }
 
         // GET api/CustomerEmployees/{id}
-        public CustomerEmployee Get(int id) { return db.GetCustomerEmployeeId(id); }
+        public CustomerEmployee Get(int id) { return _db.GetCustomerEmployeeId(id); }
 
         // POST api/CustomerEmployees
         public IHttpActionResult Post([FromBody]CustomerEmployee value)
         {
             try
             {
-                db.Add(value);
+                _db.Add(value);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace WebService.Controllers
         {
             try
             {
-                db.Edit(id, value);
+                _db.Edit(id, value);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,6 @@ namespace WebService.Controllers
         }
 
         // DELETE api/CustomerEmployees/{id}
-        public void Delete(int id) { db.DeleteCustomerEmployee(id); }
+        public void Delete(int id) { _db.DeleteCustomerEmployee(id); }
     }
 }
